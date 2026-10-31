@@ -1,0 +1,53 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# Testing
+/coverage
+
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Production
+/build
+
+# Misc
+.DS_Store
+*.pem
+Thumbs.db
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Environment
+.env
+.env*.local
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+
+# Editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Visual editor: snapshot of overrides from the start of an editing session
+data/site-overrides.backup.json
+
+# Source originals kept locally, not published: raw footage (the site serves
+# the copies in public/videos) and the hero's design-tool export.
+/containt/
+/KRL hero-html/
+
+# Agent tool scratch state
+/.unlazy/

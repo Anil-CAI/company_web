@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "theme": {},
+  "global": {
+    "footer > div:nth-of-type(1)": {
+      "label": "div · KRLRobotic SolutionsWe design, build and d…",
+      "style": {
+        "width": "1931px",
+        "max-width": "none"
+      }
+    },
+    "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(1) > img:nth-of-type(1)": {
+      "label": "img",
+      "style": {
+        "width": "246px",
+        "max-width": "none",
+        "min-height": "189px",
+        "translate": "-6px -5px"
+      }
+    },
+    "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1)": {
+      "label": "span · KRL",
+      "hidden": true,
+      "style": {
+        "width": "385px",
+        "max-width": "none",
+        "min-height": "223px",
+        "translate": "-505px 73px"
+      }
+    },
+    "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+      "label": "span · KRL",
+      "hidden": true,
+      "style": {
+        "width": "196px",
+        "max-width": "none",
+        "min-height": "50px",
+        "font-size": "50px",
+        "translate": "83px 13px"
+      }
+    },
+    "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(2)": {
+      "label": "span · KRL",
+      "style": {
+        "width": "165px",
+        "max-width": "none",
+        "translate": "33px 1px"
+      }
+    },
+    "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(1)": {
+      "label": "span",
+      "style": {
+        "width": "221px",
+        "max-width": "none",
+        "min-height": "146px"
+      }
+    }
+  },
+  "pages": {
+    "/": {
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(1)": {
+        "label": "article · 01Humanoid RoboticsG1 Custom DanceBespoke …",
+        "style": {
+          "width": "1473px",
+          "max-width": "none",
+          "min-height": "686px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > img:nth-of-type(1)": {
+        "label": "img",
+        "hidden": true
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)": {
+        "label": "div",
+        "hidden": true
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > img:nth-of-type(1)": {
+        "label": "img",
+        "hidden": true
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)": {
+        "label": "div",
+        "hidden": true
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > img:nth-of-type(1)": {
+        "label": "img",
+        "hidden": true
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)": {
+        "label": "div",
+        "hidden": true
+      },
+      "#projects > div:nth-of-type(1)": {
+        "label": "div · Selected workFeatured ProjectsSystems buil…",
+        "style": {
+          "width": "1758px",
+          "max-width": "none",
+          "min-height": "3655px"
+        }
+      },
+      "#dance-models > div:nth-of-type(1)": {
+        "label": "div · Motion labRobot dance modelsTwo routines c…",
+        "style": {
+          "width": "1917px",
+          "max-width": "none",
+          "min-height": "1960px"
+        }
+      },
+      "#services > div:nth-of-type(1)": {
+        "label": "div · CapabilitiesWhat we buildRobotics, intelli…",
+        "style": {
+          "width": "1886px",
+          "max-width": "none"
+        }
+      },
+      "#domains > div:nth-of-type(1)": {
+        "label": "div · ExpertiseDomains we work acrossFifteen int…",
+        "style": {
+          "width": "1769px",
+          "max-width": "none"
+        }
+      },
+      "#hero > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > h1:nth-of-type(1)": {
+        "label": "h1 · Light you can touch.",
+        "style": {
+          "translate": "-13px -230px",
+          "color": "#ffffff"
+        }
+      },
+      "#hero > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > p:nth-of-type(1)": {
+        "label": "p · Hover the letters to wake the fibres. Pres…",
+        "style": {
+          "translate": "-7px -191px"
+        }
+      },
+      "#hero > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(1)": {
+        "label": "a · Get in touch",
+        "style": {
+          "translate": "17px -140px"
+        }
+      }
+    },
+    "/about": {
+      "#story > div:nth-of-type(1)": {
+        "label": "div · AboutStarted in college, built on real dep…",
+        "style": {
+          "width": "1884px",
+          "max-width": "none",
+          "translate": "57px 0px"
+        }
+      },
+      "#team > div:nth-of-type(1)": {
+        "label": "div · TeamThe people behind the workA team worki…",
+        "style": {
+          "width": "1924px",
+          "max-width": "none",
+          "translate": "117px -10px"
+        }
+      },
+      "#principles > div:nth-of-type(1)": {
+        "label": "div · How we workWhat we hold toThree commitment…",
+        "style": {
+          "width": "1654px",
+          "max-width": "none"
+        }
+      }
+    },
+    "/services": {
+      "#service-categories > div:nth-of-type(1)": {
+        "label": "div · CapabilitiesWhat runs on which robotMost o…",
+        "style": {
+          "width": "1891px",
+          "max-width": "none"
+        }
+      },
+      "#service-details > div:nth-of-type(1)": {
+        "label": "div · In detailEvery capability, unpackedExpand …",
+        "style": {
+          "width": "1852px",
+          "max-width": "none"
+        }
+      },
+      "#technologies > div:nth-of-type(1)": {
+        "label": "div · StackTechnology we build onOpen standards …",
+        "style": {
+          "width": "1927px",
+          "max-width": "none"
+        }
+      },
+      "#process > div:nth-of-type(1)": {
+        "label": "div · ProcessHow an engagement runsSix phases, e…",
+        "style": {
+          "width": "1851px",
+          "max-width": "none"
+        }
+      },
+      "#faq > div:nth-of-type(1)": {
+        "label": "div · FAQQuestions we get askedHow does a typica…",
+        "style": {
+          "width": "1725px",
+          "max-width": "none"
+        }
+      },
+      "#process-title > span:nth-of-type(1) > span:nth-of-type(3) > span:nth-of-type(1)": {
+        "label": "span · engagement",
+        "style": {
+          "color": "#fbf437"
+        }
+      },
+      "#technologies-title > span:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · we",
+        "style": {
+          "color": "#e9ec27"
+        }
+      },
+      "#service-categories": {
+        "label": "section · CapabilitiesWhat runs on which robotMost o…",
+        "style": {
+          "color": "#3c363f"
+        }
+      },
+      "#platform-go2 > div:nth-of-type(2) > article:nth-of-type(1)": {
+        "label": "article · Industrial AutomationProduction cells, lin…",
+        "style": {
+          "color": "#0a010e"
+        }
+      },
+      "#platform-go2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2)": {
+        "label": "span · 8 services",
+        "style": {
+          "font-size": "35px",
+          "translate": "36px -1px"
+        }
+      },
+      "#platform-go2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · Quadruped",
+        "style": {
+          "font-size": "35px",
+          "translate": "31px -2px"
+        }
+      },
+      "#platform-go2-title": {
+        "label": "h3 · Go2",
+        "style": {
+          "font-size": "60px"
+        }
+      }
+    },
+    "/contact": {
+      "#contact > div:nth-of-type(1)": {
+        "label": "div · DirectReach usWhichever channel suits you …",
+        "style": {
+          "width": "1807px",
+          "max-width": "none"
+        }
+      },
+      "#contact-form > div:nth-of-type(1)": {
+        "label": "div · EnquirySend a messageThe more you can say …",
+        "style": {
+          "width": "1646px",
+          "max-width": "none"
+        }
+      },
+      "#map > div:nth-of-type(1)": {
+        "label": "div · LocationFind usSet a Google Maps embed URL…",
+        "style": {
+          "width": "1653px",
+          "max-width": "none"
+        }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1)": {
+        "label": "div · CONTACT",
+        "style": {
+          "width": "1224px",
+          "max-width": "none",
+          "min-height": "214px"
+        }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1)": {
+        "label": "div · CONTACT",
+        "style": {
+          "width": "746px",
+          "max-width": "none",
+          "min-height": "165px"
+        }
+      }
+    }
+  }
+}

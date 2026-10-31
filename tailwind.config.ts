@@ -90,33 +90,25 @@ const config: Config = {
          * it against the surrounding warmth rather than against white.
          */
         /*
-         * Ink ramp — inverted for the dark royal-purple page.
+         * Ink ramp — deep violet, for the lilac page.
          *
-         * The scale still runs 50 → 950, and every existing usage still means
-         * the same thing: `ink-400` is muted text, `ink-300` a hover hairline.
-         * What changed is which end is light. On the old beige sheet 50 was
-         * the near-white page and 950 the near-black ink; here 50 sits nearest
-         * the *ink* and 950 nearest the *page*, so `text-ink-400` goes on
-         * reading as a step back from the foreground rather than inverting
-         * into something invisible.
-         *
-         * The violet bias is deliberate and carries the same reasoning the
-         * warm ramp did: a stock grey dropped on a saturated purple reads as
-         * dirty, because the eye compares it against the surrounding colour.
-         * `ink-400` clears 6.9:1 on the page and 6.2:1 on a card.
+         * 50 sits nearest the page and 950 nearest the ink, so every usage
+         * keeps its meaning: `ink-300` a hover hairline, `ink-400` small muted
+         * labels (6.3:1 on the ground), `ink-900` the logo badge. Violet-biased,
+         * never stock grey — a neutral grey on lilac reads as dirty.
          */
         ink: {
-          50: '#F5F2F8',
-          100: '#EBE5F1',
-          200: '#DCD1E5',
-          300: '#C8B7D7',
-          400: '#AE98C3',
-          500: '#9479AF',
-          600: '#765798',
-          700: '#5D447E',
-          800: '#43305F',
-          900: '#301F47',
-          950: '#1C102D',
+          50: '#F7F3FB',
+          100: '#EFE9F6',
+          200: '#E2D9EF',
+          300: '#CBBEDF',
+          400: '#5B4D73',
+          500: '#4A3D61',
+          600: '#3D3152',
+          700: '#332846',
+          800: '#2E2343',
+          900: '#2A1E40',
+          950: '#1C1430',
         },
         /** The three brand colours, for the few places that name them directly. */
         /*

@@ -1,0 +1,584 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------------- */
+/* Design tokens                                                              */
+/* ------------------------------------------------------------------------- */
+
+@layer base {
+  :root {
+    /*
+     * Lilac and emerald, from the scroll storyboard.
+     *
+     * A light lilac ground (#ECE6F5) with deep-violet ink (#2A1E40), and
+     * emerald to highlight headings and data. No pure black or white anywhere:
+     * the lightest surface is #F7F3FB and the darkest is the violet ink, which
+     * also replaces black as the hero's ground.
+     *
+     * Emerald comes in two strengths because one cannot do both jobs:
+     * #0F8A5F carries headings (3.57:1 on the ground — enough at heading size,
+     * not for body copy), and #0D7651 carries small emerald text and emerald
+     * fills behind lilac-white text (4.62:1 and 5.14:1).
+     * `scripts/verify-palette.mjs tokens` recomputes these pairs.
+     */
+    /* Display colour for large headings. ← change this line to try another */
+    --display: var(--signal);
+
+    /* Brand tokens (names kept; components use them). */
+    --kumkuma: 261 36% 18%; /* #2A1E40 — deep violet */
+    --pasupu: 159 80% 26%; /* #0D7651 — deep emerald */
+    --skin: 265 42% 90%; /* #E3DAF0 — lilac */
+
+    --background: 264 43% 93%; /* #ECE6F5 — lilac ground */
+    --foreground: 261 36% 18%; /* #2A1E40 — deep violet ink, 12.7:1 */
+
+    /* Reading text — h3 to h6 and paragraphs (name kept from the dark palette). */
+    --snow: 261 36% 18%; /* #2A1E40 */
+
+    /* Large headings — h1, h2 and the display sizes. Heading size only. */
+    --signal: 159 80% 30%; /* #0F8A5F — emerald, 3.57:1 */
+
+    /* Cards lift off the ground; translucent and blurred by the glass rule. */
+    --card: 270 50% 97%; /* #F7F3FB */
+    --card-foreground: 261 36% 18%;
+
+    --popover: 270 50% 97%;
+    --popover-foreground: 261 36% 18%;
+
+    /* Primary = deep violet, for solid CTAs. */
+    --primary: 261 36% 18%; /* #2A1E40 */
+    --primary-foreground: 270 50% 97%;
+
+    --secondary: 265 42% 90%; /* #E3DAF0 */
+    --secondary-foreground: 261 36% 18%;
+
+    --muted: 265 42% 90%;
+    --muted-foreground: 262 20% 38%; /* #5B4D73 — 6.3:1 */
+
+    /* Accent = deep emerald: small emerald text, and fills under lilac text. */
+    --accent: 159 80% 26%; /* #0D7651 */
+    --accent-foreground: 270 50% 97%;
+
+    --destructive: 357 66% 45%;
+    --destructive-foreground: 270 50% 97%;
+
+    --border: 263 34% 85%; /* #D6CCE6 */
+    --input: 263 34% 80%;
+    --ring: 159 80% 26%;
+
+    --radius: 1rem;
+
+    /* Layout rhythm. */
+    --header-height: 5.75rem;
+  }
+
+  /* Desktop bar is taller to carry the larger logo and nav. */
+  @media (min-width: 1024px) {
+    :root {
+      --header-height: 7rem;
+    }
+  }
+
+  /*
+   * While the visual editor is on, the header stays put. It normally retracts
+   * on downward scroll, which made it impossible to click while editing.
+   */
+  html[data-site-editing] #site-header {
+    transform: none !important;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  /* Lenis drives scrolling; native smooth scroll would fight it. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  html.lenis {
+    scroll-behavior: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings:
+      'ss01' 1,
+      'cv01' 1,
+      'cv11' 1;
+    text-rendering: optimizeLegibility;
+  }
+
+  /*
+   * Type colour splits at the size boundary, not the semantic one.
+   *
+   * The large type — h1, h2 and anything on the display scale — takes the
+   * signal red, the page's loudest voice. Everything from h3 down, plus prose,
+   * takes the reading ink (`--snow`, a navy despite the name it kept from the
+   * dark palette).
+   *
+   * The split is by size because the contrast maths follows it: the red
+   * clears the 3:1 heading bar on every stripe but would miss the 4.5:1 body
+   * bar, so it must never reach paragraph copy.
+   *
+   * These are base-layer element rules, so any component that sets its own
+   * colour still wins on specificity.
+   */
+  h1,
+  h2 {
+    color: hsl(var(--signal));
+  }
+
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    color: hsl(var(--snow));
+  }
+
+  /* Visible, on-brand focus ring for keyboard users only. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  ::selection {
+    @apply bg-foreground text-background;
+  }
+
+  /* Headings inherit the display tracking of the type scale. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-medium tracking-tight text-balance;
+  }
+
+  /* Respect reduced-motion at the platform level. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------------- */
+/* Component utilities                                                        */
+/* ------------------------------------------------------------------------- */
+
+@layer components {
+  /* Skip link — hidden until focused. */
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]
+      focus:rounded-full focus:bg-foreground focus:px-5 focus:py-3 focus:text-sm
+      focus:font-medium focus:text-background;
+  }
+
+  /* Small uppercase label used above every section heading. */
+  .eyebrow {
+    @apply font-mono text-eyebrow uppercase text-muted-foreground;
+  }
+
+  /*
+   * Placeholder surface. Every image/video/logo slot renders this until real
+   * media is dropped in. Diagonal hairline hatch keeps it obviously "empty"
+   * without looking broken.
+   */
+  .placeholder-surface {
+    background-color: hsl(var(--muted));
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(90, 40, 34, 0.05) 10px,
+      rgba(90, 40, 34, 0.05) 11px
+    );
+  }
+
+  /*
+   * Empty media slot on a project row.
+   *
+   * The plain diagonal hatch above reads as "broken image" when it sits beside
+   * real footage. This is a drafting grid with corner registration marks
+   * instead — the same blueprint language as the hero drawing — so a slot
+   * awaiting its asset reads as a deliberate frame rather than a failure. The
+   * marks are drawn with gradients rather than pseudo-elements so the surface
+   * stays a single element and the caption can sit on top of it.
+   */
+  .placeholder-draft {
+    background-color: hsl(var(--muted));
+    background-image:
+      /* corner registration marks: two short rules per corner */
+      linear-gradient(to right, rgba(90, 40, 34, 0.26) 28px, transparent 28px),
+      linear-gradient(to bottom, rgba(90, 40, 34, 0.26) 28px, transparent 28px),
+      linear-gradient(to left, rgba(90, 40, 34, 0.26) 28px, transparent 28px),
+      linear-gradient(to top, rgba(90, 40, 34, 0.26) 28px, transparent 28px),
+      /* fine grid */ linear-gradient(rgba(90, 40, 34, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90, 40, 34, 0.06) 1px, transparent 1px);
+    background-size:
+      100% 1px,
+      1px 100%,
+      100% 1px,
+      1px 100%,
+      28px 28px,
+      28px 28px;
+    background-position:
+      18px 18px,
+      18px 18px,
+      calc(100% - 18px) calc(100% - 18px),
+      calc(100% - 18px) calc(100% - 18px),
+      0 0,
+      0 0;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, repeat, repeat;
+  }
+}
+
+/*
+ * Dance choreography for `components/home/dance-figure.tsx`.
+ *
+ * Every cycle is authored as a two-beat phrase that starts and ends at the rest
+ * pose, so a reduced-motion visitor who gets the animation frozen at 0% sees a
+ * correctly standing figure rather than a limb caught mid-swing.
+ *
+ * Amplitudes stay small — these are machines keeping time, not rubber-hose
+ * cartoons, and the drawing is thin line work that smears if pushed far.
+ */
+/*
+ * Boot-screen logo draw.
+ *
+ * Each letter stroke starts fully "unwritten" — the dash pattern is one long
+ * dash offset clear of the path — and the offset animates to zero, so the line
+ * appears to be drawn. Each path carries `pathLength="1"` in the markup, which
+ * normalises it to a length of 1 regardless of its real geometry — that is what
+ * lets one rule drive six strokes of different lengths without measuring each.
+ *
+ * `both` fill mode matters: the global reduced-motion rule collapses the
+ * duration, and without it the strokes would be stranded invisible at offset 1.
+ */
+.boot-mark .boot-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: boot-draw 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+/* Hand-tuned so the letters are written in reading order, not all at once. */
+.boot-mark .boot-stroke:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.boot-mark .boot-stroke:nth-child(2) {
+  animation-delay: 0.22s;
+}
+.boot-mark .boot-stroke:nth-child(3) {
+  animation-delay: 0.34s;
+}
+.boot-mark .boot-stroke:nth-child(4) {
+  animation-delay: 0.5s;
+}
+.boot-mark .boot-stroke:nth-child(5) {
+  animation-delay: 0.72s;
+}
+.boot-mark .boot-stroke:nth-child(6) {
+  animation-delay: 0.88s;
+}
+
+@keyframes boot-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dance-swing {
+  0%,
+  100% {
+    transform: rotate(-16deg);
+  }
+  50% {
+    transform: rotate(16deg);
+  }
+}
+
+@keyframes dance-step {
+  0%,
+  100% {
+    transform: rotate(-9deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+@keyframes dance-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes dance-head {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(7deg);
+  }
+}
+
+@keyframes dance-pitch {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes dance-yaw {
+  0%,
+  100% {
+    transform: rotate(-13deg);
+  }
+  50% {
+    transform: rotate(13deg);
+  }
+}
+
+@keyframes dance-flick {
+  0%,
+  100% {
+    transform: rotate(-22deg);
+  }
+  50% {
+    transform: rotate(22deg);
+  }
+}
+
+@layer components {
+  /*
+   * Dance figures.
+   *
+   * These use `view-box`, not the `fill-box` above: every joint origin in
+   * `dance-figure.tsx` is written in viewBox user units (`100px 116px` is a
+   * hip), which only resolves correctly against the shared SVG coordinate
+   * system. Under `fill-box` each limb would pivot around its own bounding box
+   * and the figure would come apart.
+   *
+   * Tempo comes from `--beat`, set per figure from the model's `bpm`, so the
+   * choreography in `data/dance.ts` drives the timing rather than a constant
+   * buried here.
+   */
+  .dance-figure [class^='dance-'] {
+    transform-box: view-box;
+  }
+
+  .dance-head {
+    animation: dance-head var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  .dance-arm-l {
+    animation: dance-swing var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  .dance-arm-r {
+    animation: dance-swing var(--beat, 1.2s) ease-in-out infinite reverse;
+  }
+
+  .dance-leg-l {
+    animation: dance-step var(--beat, 1.2s) ease-in-out infinite reverse;
+  }
+
+  .dance-leg-r {
+    animation: dance-step var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  .dance-biped {
+    animation: dance-bob var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  /* Quadruped: diagonal pairs, so FL moves with RR against FR and RL. */
+  .dance-body {
+    animation: dance-pitch var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  .dance-leg-fl,
+  .dance-leg-rr {
+    animation: dance-step var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  .dance-leg-fr,
+  .dance-leg-rl {
+    animation: dance-step var(--beat, 1.2s) ease-in-out infinite reverse;
+  }
+
+  .dance-quad {
+    animation: dance-bob var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  /*
+   * Arm: each joint runs at a different multiple of the beat, which is what
+   * makes the end effector trace a compound path instead of a circle.
+   */
+  .dance-j1 {
+    animation: dance-yaw calc(var(--beat, 1.2s) * 2) ease-in-out infinite;
+  }
+
+  .dance-j2 {
+    animation: dance-swing var(--beat, 1.2s) ease-in-out infinite;
+  }
+
+  .dance-j3 {
+    animation: dance-flick calc(var(--beat, 1.2s) / 2) ease-in-out infinite;
+  }
+
+  /*
+   * Landing hero copy.
+   *
+   * Positioned against the wordmark photo's box, not the viewport: the photo
+   * is 1.54:1 and fitted whole on landscape screens, so its rendered width is
+   * min(100vw, 154vh) and height min(64.95vw, 100vh). Pinning to those keeps
+   * the copy in the black above the L's foot at every window shape. Ratios
+   * are the design's own. Portrait screens move it to a card at the bottom.
+   */
+  .krl-hero-copy {
+    position: absolute;
+    left: calc(50% + 0.332 * min(100vw, 154vh));
+    top: calc(50% - 0.47 * min(64.95vw, 100vh));
+    width: calc(0.148 * min(100vw, 154vh));
+    height: calc(0.62 * min(64.95vw, 100vh));
+    font-size: clamp(13px, calc(0.0102 * min(100vw, 154vh)), 19px);
+    pointer-events: none;
+  }
+
+  .krl-hero-copy a {
+    pointer-events: auto;
+  }
+
+  /* In the visual editor the copy must be clickable, so it can be selected,
+     moved and restyled like everything else. */
+  html[data-site-editing] .krl-hero-copy {
+    pointer-events: auto;
+  }
+
+  /*
+   * The section after the hero slides up over it as a sheet of frosted lilac
+   * glass with rounded top corners: the dark-to-light handoff. Near-opaque, a
+   * blur that softens the hero behind its leading edge, a lit top rim, and a
+   * violet shadow cast back onto the hero. The hero pins itself while this
+   * happens (`hero-light.tsx`).
+   */
+  #hero + * {
+    position: relative;
+    z-index: 1;
+    background-color: hsl(var(--background) / 0.94);
+    -webkit-backdrop-filter: blur(28px) saturate(150%);
+    backdrop-filter: blur(28px) saturate(150%);
+    border-top: 1px solid rgb(255 255 255 / 0.85);
+    border-radius: 1.75rem 1.75rem 0 0;
+    box-shadow: 0 -28px 60px rgb(42 30 64 / 0.55);
+  }
+
+  @media (max-aspect-ratio: 1/1) {
+    .krl-hero-copy {
+      left: 20px;
+      right: 20px;
+      top: auto;
+      bottom: 20px;
+      width: auto;
+      height: auto;
+      font-size: 15px;
+      background: rgba(0, 0, 0, 0.78);
+      padding: 20px;
+      border-radius: 14px;
+    }
+
+    .krl-hero-spacer {
+      display: none;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------------- */
+/* Utilities                                                                  */
+/* ------------------------------------------------------------------------- */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Fades the leading/trailing edge of marquees into the page background. */
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+
+  .hairline-t {
+    @apply border-t border-border;
+  }
+
+  .hairline-b {
+    @apply border-b border-border;
+  }
+
+  /* Hide scrollbars on horizontally scrollable rails. */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Frosted-glass cards.
+ *
+ * Unlayered and last in the file, so it lands after Tailwind's own `.bg-card`
+ * utility and wins at equal specificity: every card on the site turns to
+ * glass from this one rule, with no component edits. Translucent lilac-white
+ * with a blur, a lit top edge, and a soft violet drop shadow.
+ */
+.bg-card {
+  background-color: hsl(var(--card) / 0.62);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.85),
+    0 12px 32px -14px rgb(42 30 64 / 0.2);
+}

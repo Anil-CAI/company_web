@@ -162,8 +162,6 @@ Nothing is broken while the placeholders are in place; the layout is final.
 | Add projects / project media   | `data/projects.ts`                        |
 | Add or reword services         | `data/services.ts`                        |
 | Change domains                 | `data/domains.ts`                         |
-| Set real numbers & milestones  | `data/achievements.ts`                    |
-| Add client logos               | `data/clients.ts`                         |
 | Reword any heading or section  | `data/content.ts`                         |
 | Change menus / footer links    | `data/navigation.ts`                      |
 | Change the domain, SEO defaults| `constants/site.ts`                       |
@@ -254,11 +252,10 @@ one-line change and never touches a page file.
 
 ## The hero
 
-`components/home/hero-portrait.tsx` is the opening screen. It shows a character
-illustration that dissolves into the robot as the visitor scrolls, using a WebGL
-shader (`components/ui/scroll-dissolve-reveal.tsx`). The shader is loaded only on
-the client, and reduced-motion visitors get a still image. The copy lives in
-`data/hero.ts`.
+`components/home/hero-light.tsx` is the opening screen: the KRL wordmark in
+light fibres, lit by a WebGL shader that follows the cursor and ripples on
+press-and-drag. The copy is `heroLight` in `data/hero.ts`. Without WebGL the
+still photo shows instead.
 
 ---
 
