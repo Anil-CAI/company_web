@@ -157,7 +157,7 @@ An in-browser editor lets the owner restyle, re-word, resize and delete things w
 
 ### Contact form
 
-The form POSTs to `NEXT_PUBLIC_CONTACT_ENDPOINT` (see `.env.example`). **A missing endpoint hands off to the visitor's email app, never a fake success** — a submission that silently vanishes is the worst of the three outcomes, because the sender believes they were heard.
+The form POSTs to `NEXT_PUBLIC_CONTACT_ENDPOINT` (see `.env.example`). **A failed or rejected submission shows an error naming the email address, never a fake success** — a submission that silently vanishes is the worst of the three outcomes, because the sender believes they were heard.
 
 ### Verification gates
 
@@ -169,7 +169,7 @@ Per-route metadata is composed with `buildMetadata()` in `lib/seo.ts`; the domai
 
 ### Contact form
 
-`components/contact/contact-form.tsx` validates client-side. With `NEXT_PUBLIC_CONTACT_ENDPOINT` set it POSTs there; without it, it opens a `mailto:` to the email channel in `data/contact.ts` with every field written into the body, then shows a "press Send in your email app" panel — never a success claim, since the site cannot know the mail was sent. `data/privacy.ts` describes both paths; keep it true if either changes.
+`components/contact/contact-form.tsx` validates client-side, then POSTs JSON straight to a form service: `NEXT_PUBLIC_CONTACT_ENDPOINT` if set, otherwise FormSubmit at `https://formsubmit.co/ajax/<email channel value from data/contact.ts>`. FormSubmit replies 200 even when it rejects (`success: "false"`), so the form checks the body, not just the status. Its one-time **activation** reply counts as received — the first message is held and delivered once the inbox owner clicks Activate in FormSubmit's email. `data/privacy.ts` says submissions go through a third-party form service; keep it true.
 
 ## Code conventions
 

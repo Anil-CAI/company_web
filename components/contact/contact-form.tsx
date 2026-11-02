@@ -22,11 +22,14 @@ const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
  * without a code edit, and so this repo carries no account id. Set
  * `NEXT_PUBLIC_CONTACT_ENDPOINT` in `.env.local` (see `.env.example`).
  */
-const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? '';
+const INBOX = contactChannels.find((channel) => channel.type === 'email')?.value ?? '';
+const CONTACT_ENDPOINT =
+  process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ||
+  (INBOX ? `https://formsubmit.co/ajax/${INBOX}` : '');
 
 type FormValues = Record<string, string>;
 type FormErrors = Record<string, string | undefined>;
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error' | 'handoff';
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
 
 /** Every field starts as an empty string, so inputs are controlled from render one. */
 function createInitialValues(fields: ContactField[]): FormValues {
@@ -57,9 +60,8 @@ function validate(fields: ContactField[], values: FormValues): FormErrors {
  * Contact form.
  *
  * Fields are declared in `data/contact.ts`, so adding one is a data edit rather
- * than a component change. With `NEXT_PUBLIC_CONTACT_ENDPOINT` set it posts
- * there; without it, it opens the visitor's email app with the message filled
- * in and addressed to us.
+ * than a component change. Messages go straight to the inbox through a form
+ * service (FormSubmit unless `NEXT_PUBLIC_CONTACT_ENDPOINT` overrides it).
  */
 export function ContactForm() {
   const content = contactContent.form;
@@ -92,24 +94,12 @@ export function ContactForm() {
       }
 
       /*
-       * Posts to the form endpoint in `NEXT_PUBLIC_CONTACT_ENDPOINT`.
-       *
-       * Without one, the message is handed to the visitor's own email app,
-       * written out and addressed to us — a real way to send it, rather than a
-       * dead button. The panel that follows says to press Send there; it never
-       * claims the message was sent, because from here we cannot know.
+       * Delivered straight to the inbox by a form service — FormSubmit by
+       * default, or whatever `NEXT_PUBLIC_CONTACT_ENDPOINT` names. No email
+       * app is involved on the visitor's side.
        */
       if (!CONTACT_ENDPOINT) {
-        const to = contactChannels.find((channel) => channel.type === 'email')?.href ?? '';
-        if (!to) {
-          setStatus('error');
-          return;
-        }
-        const body = contactFields
-          .map((field) => `${field.label}: ${values[field.name] ?? ''}`)
-          .join('\n\n');
-        window.location.href = `${to}?subject=${encodeURIComponent(content.mailSubject)}&body=${encodeURIComponent(body)}`;
-        setStatus('handoff');
+        setStatus('error');
         return;
       }
 
@@ -119,10 +109,29 @@ export function ContactForm() {
         const response = await fetch(CONTACT_ENDPOINT, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(values),
+          body: JSON.stringify({
+            ...values,
+            /* FormSubmit's options; other services ignore unknown fields. */
+            _subject: content.mailSubject,
+            _template: 'table',
+            _captcha: 'false',
+          }),
         });
 
-        if (!response.ok) {
+        /*
+         * FormSubmit answers 200 with `success: "false"` for a rejected
+         * submission, so the status code alone is not enough. Its one-time
+         * activation reply is the exception: that message is held and
+         * delivered once the inbox owner activates the form, so it is
+         * genuinely received.
+         */
+        const result = (await response.json().catch(() => ({}))) as {
+          success?: string | boolean;
+          message?: string;
+        };
+        const rejected = String(result.success) === 'false';
+        const awaitingActivation = /activat/i.test(result.message ?? '');
+        if (!response.ok || (rejected && !awaitingActivation)) {
           setStatus('error');
           return;
         }
@@ -152,27 +161,6 @@ export function ContactForm() {
         </div>
         <Button variant="outline" onClick={() => setStatus('idle')}>
           {content.anotherLabel}
-        </Button>
-      </div>
-    );
-  }
-
-  if (status === 'handoff') {
-    return (
-      <div
-        role="status"
-        className="flex flex-col items-start gap-6 rounded-2xl border border-border bg-card p-10 shadow-soft"
-      >
-        <Send aria-hidden="true" className="size-8 text-foreground" strokeWidth={1.25} />
-        <div>
-          <h3 className="text-2xl font-medium tracking-tight">{content.handoffTitle}</h3>
-          <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted-foreground text-pretty">
-            {content.handoffBody}
-          </p>
-        </div>
-        {/* The typed message is kept, in case the email app did not open. */}
-        <Button variant="outline" onClick={() => setStatus('idle')}>
-          {content.backLabel}
         </Button>
       </div>
     );

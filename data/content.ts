@@ -132,10 +132,6 @@ export const contactContent: ContactContent = {
     disclaimer:
       'We use what you send only to reply to your enquiry. Nothing is shared with anyone else.',
     mailSubject: 'Enquiry from the KRL Labs website',
-    handoffTitle: 'Your email app is open',
-    handoffBody:
-      'Your message is written and addressed to us — press Send in your email app to deliver it. If nothing opened, email kinematicroboticslabs@gmail.com directly.',
-    backLabel: 'Back to the form',
     anotherLabel: 'Write another message',
   },
   map: {
