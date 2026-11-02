@@ -28,7 +28,7 @@ export function DomainsSection() {
       />
 
       {/* One tile per domain — this is the full list, not a preview. */}
-      <div className="mt-20">
+      <div className="mt-10 sm:mt-20">
         <DomainsGrid />
       </div>
     </Section>

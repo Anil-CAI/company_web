@@ -70,6 +70,7 @@ Rules that are easy to break:
 - **Ink is violet-biased, never neutral grey.** Same for the Tailwind `ink-*` ramp; `ink-400` (small labels) is 6.3:1 on the ground.
 - **`backdrop-filter` makes an element the containing block for `position: fixed` descendants.** Nothing fixed or GSAP-pinned may live inside a `.bg-card` or inside the section right after the hero.
 - **The header flips light only over the black home hero** (`onDark` in `header.tsx`); everywhere else its marks are violet.
+- **Two header layouts.** Desktop (`lg+`) is the first `<Container>` in `header.tsx` — kept first so visual-editor edits saved against `#site-header > div:nth-of-type(1)` keep their address. Below `lg` a second container shows the four pages as pills on one row (never wrapping) with the menu, and "Start a project" beneath.
 - The boot screen is still pure black on purpose — it was specified that way before the storyboard.
 
 ### Motion: page transitions
@@ -95,6 +96,16 @@ CSS variables in `styles/globals.css` (`@layer base`) feed Tailwind via `tailwin
 - **Scroll-over:** GSAP pins the hero with `pinSpacing: false` for one viewport while the stage scales/fades to `HERO_RECEDE`; the `#hero + *` rule in `globals.css` gives the next section the opaque background, z-index, rounded edge and shadow that make it slide over like a page. Reduced motion skips the pin.
 - **Editor:** `.krl-hero-copy` is `pointer-events: none` (so the canvas gets the cursor) except under `html[data-site-editing]`, which is what makes the hero copy selectable and movable in the visual editor.
 - **The hero keeps the design's own colours, not the site palette:** black ground, blue-white fibres, `#F4F7FB`/`#9AA6B8` copy and an outlined `#E9EEF6` CTA. A Lilac & Emerald recolour was tried and reverted at the owner's request — don't re-theme it with the rest of the site. Instrument Sans is loaded as `--font-hero` for this section only.
+
+### Featured project videos
+
+`components/projects/in-view-autoplay.tsx` wraps each project's clip: it plays once at least `VIDEO_AUTOPLAY.playRatio` of it is in view for `dwellMs` (or on hover with a pointer), and pauses only below `pauseRatio` — the gap is what keeps a slight scroll from stopping it. Starting one pauses the others; a pause the visitor makes sticks until the clip leaves the screen. Browsers refuse audible autoplay before a tap, so it falls back to muted. `components/layout/single-audio.tsx` separately guarantees only one video on the page is audible.
+
+### Domains wall
+
+`components/home/domains-grid.tsx` over `components/ui/staggered-grid.tsx` (vendored, heavily patched). Every slot is an icon + label tile: the component's centre bento block of photos is only inserted when `bentoItems` is non-empty, and Domains passes none. Rows have a fixed height per breakpoint (not an aspect-locked grid, which squashed tiles on phones); below `lg` each domain shows once, and the 6 repeats only fill the 7-column desktop wall. The large word it assembles around is `homeContent.domains.wallWord`.
+
+The book shelf canvas in the dance section uses `touch-action: pan-y` — `none` trapped vertical swipes, so a phone could not scroll past it.
 
 ### Fleet sections: Navigation and Robot dance models
 

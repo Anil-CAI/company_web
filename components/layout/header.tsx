@@ -46,7 +46,8 @@ export function Header() {
           : 'border-b border-border bg-background/80 backdrop-blur-xl',
       )}
     >
-      <Container className="flex h-full items-center justify-between gap-8">
+      {/* Desktop bar. First in the header, so editor edits saved against it keep their address. */}
+      <Container className="hidden h-full items-center justify-between gap-8 lg:flex">
         <Logo size="lg" inverted={onDark} />
 
         <nav aria-label="Primary" className="hidden lg:block">
@@ -103,7 +104,52 @@ export function Header() {
               <ArrowRight className="size-4" />
             </Link>
           </Button>
+        </div>
+      </Container>
+
+      {/*
+        Phones and tablets: the four pages as pills, always in reach, with the
+        menu beside them and "Start a project" on a second line — a hidden
+        hamburger alone made every page a two-tap trip.
+      */}
+      <Container className="flex h-full flex-col justify-center gap-2 lg:hidden">
+        <div className="flex items-center justify-between gap-2">
+          <nav aria-label="Primary">
+            <ul className="flex flex-nowrap items-center gap-1">
+              {mainNavigation.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <li key={item.id}>
+                    <Link
+                      href={item.href}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={cn(
+                        'inline-flex h-8 items-center whitespace-nowrap rounded-full border px-2.5 text-xs',
+                        'transition-colors duration-300 ease-premium',
+                        isActive ? 'font-semibold' : 'font-medium',
+                        onDark
+                          ? 'border-transparent bg-white text-black'
+                          : 'border-border bg-card text-foreground',
+                        isActive && !onDark && 'border-foreground',
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
           <MobileNav triggerClassName={onDark ? 'text-white' : undefined} />
+        </div>
+        <div className="flex justify-end">
+          <Link
+            href={ROUTES.contact}
+            className="inline-flex h-8 items-center gap-1.5 rounded-full bg-[#0D7651] px-3 text-[0.8125rem] font-medium text-[#F7F3FB] transition-colors duration-300 hover:bg-[#0B6646]"
+          >
+            Start a project
+            <ArrowRight className="size-3.5" />
+          </Link>
         </div>
       </Container>
     </header>

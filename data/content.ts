@@ -34,6 +34,8 @@ export const homeContent: HomeContent = {
     title: 'Domains we work across',
     description:
       'Fifteen intersecting disciplines. Most systems we ship draw on several of them at once.',
+    /* The large word the Domains wall assembles around. */
+    wallWord: 'Disciplines',
   },
   contact: {
     eyebrow: 'Contact',

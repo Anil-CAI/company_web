@@ -277,7 +277,10 @@ export function StaggeredGrid({
 
     // Replace the slot where we want the bento group
     // Position at index 16 = Row 3 (middle row), spanning columns 3-5 (center)
-    mixedGridItems[16] = 'BENTO_GROUP';
+    // KRL change: only when bento items are supplied. Without them every slot
+    // is an ordinary tile, rather than a 3-column hole.
+    const hasBento = Boolean(bentoItems?.length)
+    if (hasBento) mixedGridItems[16] = 'BENTO_GROUP';
 
     return (
         <div
@@ -286,8 +289,8 @@ export function StaggeredGrid({
                 '--grid-item-translate': '0px',
             } as React.CSSProperties}
         >
-            <section className="grid place-items-center w-full relative mt-[10vh]">
-                <div ref={textRef} className="text font-alt uppercase flex content-center text-[clamp(3rem,14vw,10rem)] leading-[0.7] text-neutral-900 dark:text-white">
+            <section className="grid place-items-center w-full relative mt-6 sm:mt-[10vh]">
+                <div ref={textRef} className="text font-alt uppercase flex content-center text-[clamp(2.5rem,12vw,10rem)] leading-[0.7] text-headline">
                     {splitText(centerText)}
                 </div>
             </section>
@@ -301,7 +304,13 @@ export function StaggeredGrid({
                       whatever the breakpoint resolves to without further
                       changes.
                     */
-                    className="grid--full relative w-full my-[10vh] h-auto aspect-[0.8] sm:aspect-[1.1] max-w-none p-4 grid gap-2 sm:gap-4 grid-cols-3 sm:grid-cols-5 lg:grid-cols-7 grid-rows-7 sm:grid-rows-5">
+                    /*
+                      KRL change: rows have a fixed height per breakpoint
+                      instead of the grid being locked to an aspect ratio. A
+                      phone's 7 rows came out ~65px tall and cut every label
+                      off; and on desktop the last two rows sat empty.
+                    */
+                    className="grid--full relative w-full my-6 sm:my-[10vh] h-auto max-w-none p-4 grid gap-2 sm:gap-4 grid-cols-3 sm:grid-cols-5 lg:grid-cols-7 auto-rows-[6.5rem] sm:auto-rows-[7rem] lg:auto-rows-[8rem]">
                     <div className="grid-overlay absolute inset-0 z-[15] pointer-events-none opacity-0 bg-white/80 dark:bg-black/80 rounded-lg transition-opacity duration-500" />
                     {mixedGridItems.map((item, i) => {
                         if (item === 'BENTO_GROUP') {
@@ -395,17 +404,18 @@ export function StaggeredGrid({
 
                         // Skip rendering for the slots that the group takes up
                         // Group starts at 16, takes 17, 18.
-                        if (i === 17 || i === 18) return null;
+                        if (hasBento && (i === 17 || i === 18)) return null;
 
                         /* KRL: a labelled tile — a domain name and its icon. */
                         if (typeof item === 'object' && item !== null && 'label' in item) {
                             return (
-                                <figure key={`tile-${i}`} data-col={i % 7} className="grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-default">
+                                /* Repeats only fill the 7-column desktop wall; phones and tablets list each domain once. */
+                                <figure key={`tile-${i}`} data-col={i % 7} className={cn("grid__item m-0 relative z-10 [perspective:800px] will-change-[transform,opacity] group cursor-default", tiles && i >= tiles.length && "hidden lg:block")}>
                                     <div className="grid__item-img w-full h-full [backface-visibility:hidden] will-change-transform rounded-xl overflow-hidden border border-border bg-card shadow-sm flex flex-col items-center justify-center gap-2 p-3 text-center transition-all duration-500 ease-out group-hover:-translate-y-1 group-hover:border-ink-300 group-hover:shadow-lg">
                                         <span className="text-foreground/70 transition-colors duration-300 group-hover:text-foreground">
                                             {item.icon}
                                         </span>
-                                        <span className="font-mono text-[9px] leading-tight uppercase tracking-[0.1em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
+                                        <span className="font-mono text-[10px] leading-tight uppercase tracking-[0.08em] text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                                             {item.label}
                                         </span>
                                     </div>

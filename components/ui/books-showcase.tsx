@@ -1776,7 +1776,7 @@ export function BooksShowcase({
         </span>
       </div>
 
-      <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 z-[2] block h-full w-full touch-none" />
+      <canvas ref={canvasRef} aria-hidden="true" className="absolute inset-0 z-[2] block h-full w-full touch-pan-y" />
 
       {books.length === 0 && (
         <div className="absolute inset-0 z-10 flex items-center justify-center p-8 text-center text-sm text-current opacity-60">

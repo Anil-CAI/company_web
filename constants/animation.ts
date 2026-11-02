@@ -86,3 +86,10 @@ export const COUNTER_DURATION = 2;
  * and fades. Small on purpose — it should read as stepping back, not leaving.
  */
 export const HERO_RECEDE = { scale: 0.9, opacity: 0.35 } as const;
+
+/**
+ * Project clips autoplay when the visitor stops on them: play above
+ * `playRatio` in view after `dwellMs`, pause only below `pauseRatio`. The gap
+ * between the two is what keeps a slight scroll from stopping the clip.
+ */
+export const VIDEO_AUTOPLAY = { playRatio: 0.6, pauseRatio: 0.25, dwellMs: 400 } as const;

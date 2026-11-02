@@ -7,6 +7,7 @@ import * as React from 'react';
 import { MagneticButton } from '@/components/common/magnetic-button';
 import { PlaceholderImage } from '@/components/common/placeholder-image';
 import { PlaceholderVideo } from '@/components/common/placeholder-video';
+import { InViewAutoplay } from '@/components/projects/in-view-autoplay';
 import { Reveal } from '@/components/common/reveal';
 import { ProjectPlatforms } from '@/components/projects/project-platforms';
 import { Badge } from '@/components/ui/badge';
@@ -153,11 +154,13 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             footage is mixed — 16:9 screen captures alongside 9:16 phone
             recordings — and one hardcoded frame letterboxes half of them.
           */}
-          <PlaceholderVideo
-            media={project.video}
-            ratio={project.videoRatio ?? 'video'}
-            className="shadow-soft transition-shadow duration-700 ease-premium group-hover:shadow-lift"
-          />
+          <InViewAutoplay>
+            <PlaceholderVideo
+              media={project.video}
+              ratio={project.videoRatio ?? 'video'}
+              className="shadow-soft transition-shadow duration-700 ease-premium group-hover:shadow-lift"
+            />
+          </InViewAutoplay>
         </div>
       </Reveal>
     </article>

@@ -24,7 +24,7 @@ export interface HomeContent {
   projects: SectionContent;
   dance: SectionContent;
   services: SectionContent;
-  domains: SectionContent;
+  domains: SectionContent & { wallWord: string };
   contact: SectionContent & { body: string };
 }
 
