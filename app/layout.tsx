@@ -72,6 +72,9 @@ export const metadata: Metadata = {
     },
   },
   formatDetection: { telephone: false, address: false, email: false },
+  verification: {
+    google: '4ybZRSbruhvz0CicEwgTWrNv9foMFiPzEhRxnPzmX6s',
+  },
 };
 
 export const viewport: Viewport = {
