@@ -7,7 +7,7 @@
 
 export { company } from '@/data/company';
 export { teamContent } from '@/data/team';
-export { danceModels } from '@/data/dance';
+export { danceRoutines } from '@/data/dance';
 export {
   contactChannels,
   contactFields,

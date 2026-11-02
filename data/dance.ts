@@ -1,27 +1,21 @@
-import type { DanceModel } from '@/types/dance';
+import type { DanceRoutine } from '@/types/dance';
 
 /**
  * Robot dance routines.
  *
- * Both run on the G1 humanoid — the only platform we have choreographed — so
- * the cards are two routines on one robot rather than one routine on each of
- * several. Each is set to a track from the Telugu film *Paradise*.
- *
- * `bpm` drives the stage tempo in the section component, so changing a number
- * here changes how fast that figure moves; no component edit required.
+ * Both run on the G1 humanoid — the only platform we have choreographed — and
+ * each is set to a track from the Telugu film *Paradise*. Each object is one
+ * book on the shelf and everything its reader shows: video, story, moves, tags.
  */
-export const danceModels: DanceModel[] = [
+export const danceRoutines: DanceRoutine[] = [
   {
     id: 'dance-01',
-    slug: 'g1-ayaa-sher',
-    name: 'Ayaa Sher',
+    title: 'Ayaa Sher',
     platform: 'G1 Humanoid',
-    track: { title: 'Ayaa Sher', film: 'Paradise' },
-    video: {
-      src: '/videos/g1-dance-ayaa-sher.mp4',
-      poster: '/videos/g1-dance-ayaa-sher-poster.jpg',
-      label: 'G1 humanoid dancing to Ayaa Sher',
-    },
+    song: { title: 'Ayaa Sher', film: 'Paradise' },
+    videoSrc: '/videos/g1-dance-ayaa-sher.mp4',
+    poster: '/videos/g1-dance-ayaa-sher-poster.jpg',
+    videoLabel: 'G1 humanoid dancing to Ayaa Sher',
     summary:
       'The faster of the two routines: driving beat, wide stance work and arm accents that land on the percussion rather than the melody.',
     story: [
@@ -33,45 +27,39 @@ export const danceModels: DanceModel[] = [
       'The result was better than we expected. But honestly, the best part was not the robot. It was the claps and the cheers. Standing there watching people react to something we had struggled with for four months was hard to put into words. It made us proud, and it made us emotional.',
       'The song ended that night, but what we built and what we saw that day will stay with us. This was not just a robot dance — it was our attempt to take something we love, our own language and music, and turn it into something new with technology.',
     ],
-    capabilities: ['Whole-body control', 'ZMP balance', '23 DoF', 'Beat sync'],
+    tags: ['Whole-body control', 'ZMP balance', '23 DoF', 'Beat sync'],
     moves: [
       {
-        id: 'ayaa-stance',
-        marker: 'A',
+        letter: 'A',
         name: 'Wide stance drop',
-        description: 'Weight drops onto a widened base on the downbeat, knees absorbing the impact.',
         bpm: 128,
-        dof: 'Hip · Knee',
+        bodyParts: 'Hip · Knee',
+        text: 'Weight drops onto a widened base on the downbeat, knees absorbing the impact.',
       },
       {
-        id: 'ayaa-accent',
-        marker: 'B',
+        letter: 'B',
         name: 'Arm accent',
-        description: 'Both arms snap to a held pose on the percussion hit, jerk-limited to protect the shoulders.',
         bpm: 128,
-        dof: 'Arm · Wrist',
+        bodyParts: 'Arm · Wrist',
+        text: 'Both arms snap to a held pose on the percussion hit, jerk-limited to protect the shoulders.',
       },
       {
-        id: 'ayaa-turn',
-        marker: 'C',
+        letter: 'C',
         name: 'Quarter turn',
-        description: 'Yaw of ninety degrees across two beats without the centre of mass leaving the support polygon.',
         bpm: 112,
-        dof: 'Torso · Leg',
+        bodyParts: 'Torso · Leg',
+        text: 'Yaw of ninety degrees across two beats without the centre of mass leaving the support polygon.',
       },
     ],
   },
   {
     id: 'dance-02',
-    slug: 'g1-yeshnagula',
-    name: 'Yeshnagula',
+    title: 'Yeshnagula',
     platform: 'G1 Humanoid',
-    track: { title: 'Yeshnagula', film: 'Paradise' },
-    video: {
-      src: '/videos/g1-dance-yeshnagula.mp4',
-      poster: '/videos/g1-dance-yeshnagula-poster.jpg',
-      label: 'G1 humanoid dancing to Yeshnagula',
-    },
+    song: { title: 'Yeshnagula', film: 'Paradise' },
+    videoSrc: '/videos/g1-dance-yeshnagula.mp4',
+    poster: '/videos/g1-dance-yeshnagula-poster.jpg',
+    videoLabel: 'G1 humanoid dancing to Yeshnagula',
     summary:
       'Slower and more sustained, built around continuous weight transfer — the balance controller is doing its hardest work here, not in the fast routine.',
     story: [
@@ -80,31 +68,28 @@ export const danceModels: DanceModel[] = [
       'Two completely different vibes. One robot. One team. And a great deal of work behind those few minutes on stage.',
       'Seeing a humanoid perform songs from our Telugu culture in front of an audience at IIT Bombay is something we will always remember. The song ended and the lights went off, but that moment stayed with us.',
     ],
-    capabilities: ['Whole-body control', 'Weight transfer', '23 DoF', 'Beat sync'],
+    tags: ['Whole-body control', 'Weight transfer', '23 DoF', 'Beat sync'],
     moves: [
       {
-        id: 'yesh-sway',
-        marker: 'A',
+        letter: 'A',
         name: 'Counterweight sway',
-        description: 'Hips lead, torso lags a half beat — the balance loop absorbs the offset.',
         bpm: 92,
-        dof: 'Hip · Torso',
+        bodyParts: 'Hip · Torso',
+        text: 'Hips lead, torso lags a half beat — the balance loop absorbs the offset.',
       },
       {
-        id: 'yesh-wave',
-        marker: 'B',
+        letter: 'B',
         name: 'Arm wave',
-        description: 'A travelling joint wave along seven links, timed to arrive on the downbeat.',
         bpm: 92,
-        dof: 'Arm · Wrist',
+        bodyParts: 'Arm · Wrist',
+        text: 'A travelling joint wave along seven links, timed to arrive on the downbeat.',
       },
       {
-        id: 'yesh-step',
-        marker: 'C',
+        letter: 'C',
         name: 'Cross step',
-        description: 'Support foot swaps mid-phrase without breaking the centre of mass path.',
         bpm: 104,
-        dof: 'Leg · Ankle',
+        bodyParts: 'Leg · Ankle',
+        text: 'Support foot swaps mid-phrase without breaking the centre of mass path.',
       },
     ],
   },

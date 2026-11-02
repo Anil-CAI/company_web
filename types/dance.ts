@@ -1,55 +1,48 @@
-import type { VideoMedia } from '@/types/media';
+/**
+ * A robot dance routine, as shown in the "Robot dance models" section.
+ *
+ * One object holds everything about a routine: the book on the shelf, and the
+ * reader it opens into (video, story, moves, tags). Nothing is shown anywhere
+ * else, so there is one place to edit a routine.
+ */
 
-/** Shape of the robot dance models showcase. */
-
+/** One choreographed move, listed A–C under the reader's "Moves" tab. */
 export interface DanceMove {
-  id: string;
-  /** Single-letter index shown in the card gutter, like the hero spec rows. */
-  marker: string;
+  /** Single-letter index, e.g. "A". */
+  letter: string;
   name: string;
-  /** One line on what the move demonstrates. */
-  description: string;
-  /**
-   * Beats-per-minute the move is choreographed against. Drives the stage's
-   * animation tempo, so it is a number rather than display copy.
-   */
+  /** Beats per minute the move is choreographed against. */
   bpm: number;
-  /** Degrees of freedom the move exercises. Rendered as a chip. */
-  dof: string;
+  /** Joints the move works, e.g. "Hip · Knee". */
+  bodyParts: string;
+  /** One line on what the move demonstrates. */
+  text: string;
 }
 
-/** The piece of music a routine is choreographed to. */
-export interface DanceTrack {
+/** The track a routine is danced to. */
+export interface DanceSong {
   title: string;
   /** Film the track is from. */
   film: string;
 }
 
-export interface DanceModel {
+export interface DanceRoutine {
   id: string;
-  slug: string;
   /** Routine name — in practice the track it is danced to. */
-  name: string;
-  /** Platform the routine runs on, e.g. "G1 Humanoid". */
+  title: string;
+  song: DanceSong;
+  /** Robot it runs on, e.g. "G1 Humanoid". */
   platform: string;
-  track: DanceTrack;
-  /**
-   * Footage of the routine.
-   *
-   * Optional: a routine with no clip falls back to the animated stick figure,
-   * which is what the cards showed before any footage existed.
-   */
-  video?: VideoMedia;
+  /** Two-line summary under the title. */
   summary: string;
-  /**
-   * The full account of how the routine was made.
-   *
-   * One paragraph per entry. Shown when someone opens the routine on the 3D
-   * shelf — the place where a visitor has actively asked for more than the
-   * one-line summary.
-   */
-  story?: readonly string[];
-  /** Chips rendered on the card. */
-  capabilities: readonly string[];
+  /** The full account, one paragraph per entry — the reader's "Story" tab. */
+  story: readonly string[];
+  /** Footage of the routine, and the frame shown before it plays. */
+  videoSrc: string;
+  poster: string;
+  /** Read out by screen readers for the video. */
+  videoLabel: string;
   moves: readonly DanceMove[];
+  /** Technique chips under the moves. */
+  tags: readonly string[];
 }

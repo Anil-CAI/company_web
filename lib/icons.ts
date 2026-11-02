@@ -76,6 +76,12 @@ const Whatsapp = createLucideIcon('Whatsapp', [
   ],
 ]);
 
+/* X (formerly Twitter): Tabler's MIT-licensed "brand-x" outline. */
+const XLogo = createLucideIcon('XLogo', [
+  ['path', { d: 'M4 4l11.733 16h4.267l-11.733 -16z', key: 'stroke' }],
+  ['path', { d: 'M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772', key: 'cross' }],
+]);
+
 export const iconRegistry = {
   activity: Activity,
   'arrow-right': ArrowRight,
@@ -108,6 +114,7 @@ export const iconRegistry = {
   'map-pin': MapPin,
   message: MessageCircle,
   whatsapp: Whatsapp,
+  x: XLogo,
   microscope: Microscope,
   move3d: Move3d,
   network: Network,

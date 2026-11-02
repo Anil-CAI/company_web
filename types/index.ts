@@ -9,7 +9,7 @@ export type {
   FaqItem,
 } from '@/types/service';
 export type { Project } from '@/types/project';
-export type { DanceModel, DanceMove, DanceTrack } from '@/types/dance';
+export type { DanceMove, DanceRoutine, DanceSong } from '@/types/dance';
 export type { NavPlatform, NavCapability, CapabilityStatus } from '@/types/navigation-stack';
 export type { Domain } from '@/types/domain';
 export type { HeroLight } from '@/types/hero';

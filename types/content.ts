@@ -22,7 +22,20 @@ export interface HeroContent {
 /** Landing page copy. */
 export interface HomeContent {
   projects: SectionContent;
-  dance: SectionContent;
+  dance: SectionContent & {
+    reader: {
+      storyTab: string;
+      movesTab: string;
+      close: string;
+      play: string;
+      pause: string;
+      mute: string;
+      unmute: string;
+      fullscreen: string;
+      seek: string;
+      bpm: string;
+    };
+  };
   services: SectionContent;
   domains: SectionContent & { wallWord: string };
   contact: SectionContent & { body: string };

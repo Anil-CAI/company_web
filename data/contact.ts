@@ -28,9 +28,10 @@ export const contactChannels: ContactChannel[] = [
     id: 'contact-instagram',
     type: 'instagram',
     label: 'Instagram',
-    value: '@kinematicsroboticslabs',
+    value: '@kinematicroboticslabs',
     placeholder: 'Add Instagram handle',
-    href: 'https://instagram.com/kinematicsroboticslabs',
+    /* ig.me opens a direct message to the account, not its profile. */
+    href: 'https://ig.me/m/kinematicroboticslabs',
     icon: 'instagram',
   },
   {
@@ -56,11 +57,23 @@ export const contactChannels: ContactChannel[] = [
     id: 'contact-linkedin',
     type: 'linkedin',
     label: 'LinkedIn',
-    /* Profile URL not supplied yet — mark, not a dead link. */
-    value: '\u2715',
+    value: 'Kinematics Robotics Labs (KRL)',
     placeholder: 'Add LinkedIn profile',
-    href: '',
+    /* LinkedIn has no public "message this person" link; the profile's own
+       Message button is one tap from here. */
+    href: 'https://www.linkedin.com/in/kinematics-robotics-labs-krl-974597426/',
     icon: 'linkedin',
+  },
+  {
+    id: 'contact-x',
+    type: 'x',
+    label: 'X',
+    value: '@KRLRobotics',
+    placeholder: 'Add X handle',
+    /* X only links straight to a DM by numeric account ID; until that is
+       supplied this opens the profile, whose Message button is one tap away. */
+    href: 'https://x.com/KRLRobotics',
+    icon: 'x',
   },
   {
     id: 'contact-location',

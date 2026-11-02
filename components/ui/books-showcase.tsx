@@ -65,6 +65,33 @@ export interface BooksShowcaseProps {
   };
   className?: string;
   onBookSelect?: (book: BookCfg | null) => void;
+  /**
+   * KRL addition: an outside HTML reader replaces the built-in detail view.
+   * The chosen book flies to the centre facing the viewer with its cover kept
+   * shut (no tilt, no page flips), the built-in panel and × are not drawn, and
+   * Esc is left to the reader.
+   */
+  readerMode?: boolean;
+  /** KRL addition: imperative handle for the outside reader. */
+  controllerRef?: React.MutableRefObject<BooksController | null>;
+  /** KRL addition: fired once the chosen book has reached the centre. */
+  onBookReady?: (id: string) => void;
+}
+
+/** KRL addition: what an outside reader can ask of the shelf. */
+export interface BooksController {
+  /** Open a book by `BookCfg.id` (from the shelf only). */
+  open: (id: string) => void;
+  /** Send the open book back to the shelf. */
+  close: () => void;
+  /** Swap which book is "open", instantly and invisibly, while the reader covers it. */
+  swap: (id: string) => void;
+  /** The open book's front cover, projected to viewport pixels. */
+  coverRect: () => DOMRect | null;
+  /** While true the 3D book is hidden and only the leaves are drawn. */
+  setReaderOpen: (open: boolean) => void;
+  /** Return keyboard focus to a book's button on the shelf. */
+  focusBook: (id: string) => void;
 }
 
 function ChevronLeft() {
@@ -95,6 +122,9 @@ export function BooksShowcase({
   themeColors,
   className,
   onBookSelect,
+  readerMode = false,
+  controllerRef,
+  onBookReady,
 }: BooksShowcaseProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -107,6 +137,12 @@ export function BooksShowcase({
   useEffect(() => {
     onBookSelectRef.current = onBookSelect;
   }, [onBookSelect]);
+  const onBookReadyRef = useRef(onBookReady);
+  useEffect(() => {
+    onBookReadyRef.current = onBookReady;
+  }, [onBookReady]);
+  /* KRL: one keyboard button per book, kept over the book by the frame loop. */
+  const bookBtnRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const [uiMode, setUiMode] = useState<'hero' | 'opening' | 'detail' | 'closing'>('hero');
   const [selectedCfg, setSelectedCfg] = useState<BookCfg | null>(null);
@@ -849,6 +885,8 @@ export function BooksShowcase({
       items: [] as any[],
       anchor: null as Book | null,
       activate(book: Book) {
+        /* KRL: reduced motion gets no falling leaves at all. */
+        if (RM) return;
         this.anchor = book;
         this.items.forEach((l) => {
           l.kick.set(-l.hx + (Math.random() - 0.5) * 0.6, -l.hy + (Math.random() - 0.5) * 0.6, (Math.random() - 0.5) * 0.5);
@@ -924,7 +962,9 @@ export function BooksShowcase({
       hovered: Book | null;
       pillLock: Book | null;
       kbIndex: number;
-    } = { mode: 'hero', selected: null, hovered: null, pillLock: null, kbIndex: -1 };
+      /** KRL: an outside reader is covering the open book. */
+      readerOpen: boolean;
+    } = { mode: 'hero', selected: null, hovered: null, pillLock: null, kbIndex: -1, readerOpen: false };
 
     type Slot = { p: [number, number, number]; r: [number, number, number]; s: number };
     const SLOTS: { hero: Slot[]; detail: Slot | null; portrait: boolean } = { hero: [], detail: null, portrait: false };
@@ -949,6 +989,14 @@ export function BooksShowcase({
           { p: [2.35, -0.64, -0.34], r: [-0.045, -0.42, -0.17], s: 1.22 },
         ];
 
+      if (readerMode) {
+        /* KRL: centred and square-on, so the HTML spread can take over from
+           the front cover without a visible jump. */
+        /* Sized to stay wholly inside the stage: the canvas clips anything
+           taller, and the HTML spread must start from what is actually seen. */
+        SLOTS.detail = { p: [0, 0, 0.9], r: [0, 0, 0], s: SLOTS.portrait ? 0.84 : 0.9 };
+        return;
+      }
       if (!showDetailPanel) {
         SLOTS.detail = { p: [0, -0.05, 0.75], r: [0.02, -0.34, 0.05], s: SLOTS.portrait ? 0.94 : 1.08 };
         return;
@@ -1123,7 +1171,12 @@ export function BooksShowcase({
       parY = new Spring(0, 60, 10);
 
     function camTo(mode: string) {
-      if (mode === 'detail') {
+      if (mode === 'detail' && readerMode) {
+        camX.t = 0;
+        camZ.t = SLOTS.portrait ? 10.4 : 9.6;
+        lookX.t = 0;
+        lookY.t = 0;
+      } else if (mode === 'detail') {
         camX.t = SLOTS.portrait ? 0 : -0.25;
         camZ.t = SLOTS.portrait ? 10.4 : 9.6;
         lookX.t = SLOTS.portrait ? 0 : -0.35;
@@ -1198,12 +1251,17 @@ export function BooksShowcase({
           root!.classList.add('bs-detail-open');
           state.mode = 'detail';
           setUiMode('detail');
+          /* KRL: "ready" is reported by the frame loop once the book has
+             actually come to rest — on a slow device the motion lags this
+             timer, and the reader measures the cover the moment it hears. */
+          readyPending = true;
         }
       }, 1400);
     }
 
     function close() {
       if (state.mode !== 'detail') return;
+      readyPending = false;
       state.mode = 'closing';
       setUiMode('closing');
       root!.classList.remove('bs-detail-open');
@@ -1239,6 +1297,76 @@ export function BooksShowcase({
 
     const onCloseClick = () => close();
     closeBtnRef.current?.addEventListener('click', onCloseClick);
+
+    /* KRL: the outside reader's handle on the shelf. */
+    const coverBox = new THREE.Box3();
+    const corner = new THREE.Vector3();
+    function projectedRect(b: Book): DOMRect | null {
+      b.frontMesh.updateWorldMatrix(true, false);
+      camera.updateMatrixWorld();
+      coverBox.setFromObject(b.frontMesh);
+      if (coverBox.isEmpty()) return null;
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (let i = 0; i < 8; i++) {
+        corner.set(i & 1 ? coverBox.max.x : coverBox.min.x, i & 2 ? coverBox.max.y : coverBox.min.y, i & 4 ? coverBox.max.z : coverBox.min.z).project(camera);
+        const px = (corner.x * 0.5 + 0.5) * dims.w;
+        const py = (-corner.y * 0.5 + 0.5) * dims.h;
+        x0 = Math.min(x0, px); y0 = Math.min(y0, py); x1 = Math.max(x1, px); y1 = Math.max(y1, py);
+      }
+      const r = canvas!.getBoundingClientRect();
+      return new DOMRect(r.left + x0, r.top + y0, x1 - x0, y1 - y0);
+    }
+    const byId = (id: string) => bookInstances.find((b) => b.cfg.id === id) ?? null;
+    let readyPending = false;
+    const SETTLE_KEYS = ['px', 'py', 'pz', 'rx', 'ry', 'rz', 'sc'] as const;
+    function hasSettled(b: Book) {
+      if (b.exit || b.orbPhase !== 'idle') return false;
+      return SETTLE_KEYS.every((k) => {
+        const sp = b.springs[k];
+        return Math.abs(sp.v - sp.t) < 0.003 && Math.abs(sp.vel) < 0.01;
+      });
+    }
+    let pendingFocus = -1;
+    if (controllerRef) {
+      controllerRef.current = {
+        open: (id) => {
+          const b = byId(id);
+          if (b && currentWindow.includes(bookInstances.indexOf(b))) open(b);
+        },
+        close: () => close(),
+        swap: (id) => {
+          const next = byId(id);
+          const prev = state.selected;
+          if (!next || !prev || next === prev || state.mode !== 'detail') return;
+          /* Put the next book exactly where the open one is, hidden under the
+             reader, so closing later folds the right cover back. */
+          const d = SLOTS.detail!;
+          const sp = next.springs;
+          sp.px.set(d.p[0]); sp.py.set(d.p[1]); sp.pz.set(d.p[2]);
+          sp.rx.set(d.r[0]); sp.ry.set(d.r[1]); sp.rz.set(d.r[2]);
+          sp.sc.set(d.s);
+          next.slotScale = d.s;
+          next.exit = null;
+          next.orbY = 0; next.orbYv = 0; next.orbPhase = 'idle'; next.orbTarget = 0;
+          prev.root.visible = false;
+          next.root.visible = !state.readerOpen;
+          state.selected = next;
+          leaves.anchor = next;
+          setSelectedCfg(next.cfg);
+        },
+        coverRect: () => (state.selected ? projectedRect(state.selected) : null),
+        setReaderOpen: (openNow) => {
+          state.readerOpen = openNow;
+          if (state.selected) state.selected.root.visible = !openNow;
+          resumeAnimation();
+        },
+        focusBook: (id) => {
+          /* The button is only shown once its book is back on the shelf, so
+             the frame loop focuses it then. */
+          pendingFocus = bookInstances.findIndex((b) => b.cfg.id === id);
+        },
+      };
+    }
 
     // Input: pointer as hand, drag to peel, keyboard
     const ptr = {
@@ -1375,7 +1503,7 @@ export function BooksShowcase({
     canvas.addEventListener('lostpointercapture', cancelPointer as any);
 
     const onKeydown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') close();
+      if (e.key === 'Escape' && !readerMode) close();
       if (state.mode !== 'hero') return;
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
         if (e.shiftKey) {
@@ -1387,7 +1515,8 @@ export function BooksShowcase({
         }
         e.preventDefault();
       }
-      if (e.key === 'Enter' && state.hovered) open(state.hovered);
+      /* KRL: a book button handles its own Enter; this is the pointer-hover shortcut. */
+      if (e.key === 'Enter' && state.hovered && !(e.target instanceof HTMLButtonElement)) open(state.hovered);
     };
     root.addEventListener('keydown', onKeydown);
 
@@ -1465,7 +1594,7 @@ export function BooksShowcase({
       b.orbXs.update(dt);
 
       let coverBase = 0;
-      if (inDetail) coverBase = DETAIL_OPEN_ANGLE + Math.sin(t * 0.8 + b.phase) * DETAIL_OPEN_SWAY * idle;
+      if (inDetail && !readerMode) coverBase = DETAIL_OPEN_ANGLE + Math.sin(t * 0.8 + b.phase) * DETAIL_OPEN_SWAY * idle;
       const fan = orbitActive ? clamp(b.orbYv * 0.16, 0, 0.75) : 0;
       const fanB = orbitActive ? clamp(-b.orbYv * 0.16, 0, 0.75) : 0;
       let coverBBase = 0;
@@ -1545,6 +1674,16 @@ export function BooksShowcase({
       timer.update(timestamp);
       const dt = Math.min(timer.getDelta(), 0.05);
       const t = timer.getElapsed();
+      /*
+       * KRL: while the outside reader covers the stage, the books are hidden;
+       * only the leaves are animated and drawn, and nothing is drawn at all
+       * once none of them is visible.
+       */
+      if (state.readerOpen) {
+        leaves.update(dt, t);
+        if (leaves.items.some((l) => l.mesh.visible)) renderer.render(scene, camera);
+        return;
+      }
 
       if (ptr.seen && (ptr.type === 'mouse' || ptr.down)) castRay();
       let hov: Book | null = null;
@@ -1567,8 +1706,9 @@ export function BooksShowcase({
       bookInstances.forEach((b) => tickBook(b, dt, t));
       leaves.update(dt, t);
 
-      parX.t = RM ? 0 : ptr.ndcX * 0.02;
-      parY.t = RM ? 0 : -ptr.ndcY * 0.012;
+      const still = RM || (readerMode && state.mode !== 'hero');
+      parX.t = still ? 0 : ptr.ndcX * 0.02;
+      parY.t = still ? 0 : -ptr.ndcY * 0.012;
       bookRoot.rotation.y = parX.update(dt);
       bookRoot.rotation.x = parY.update(dt);
 
@@ -1592,6 +1732,31 @@ export function BooksShowcase({
       } else {
         hidePill();
       }
+
+      /* KRL: tell the outside reader the open book is centred and still. */
+      if (readyPending && state.mode === 'detail' && state.selected && hasSettled(state.selected)) {
+        readyPending = false;
+        onBookReadyRef.current?.(state.selected.cfg.id);
+      }
+
+      /* KRL: each book's keyboard button tracks its projected cover. */
+      const canvasBox = canvas!.getBoundingClientRect();
+      bookInstances.forEach((b, i) => {
+        const btn = bookBtnRefs.current[i];
+        if (!btn) return;
+        const shown = state.mode === 'hero' && currentWindow.includes(i) && b.root.visible;
+        btn.style.visibility = shown ? 'visible' : 'hidden';
+        if (!shown) return;
+        const r = projectedRect(b);
+        if (!r) return;
+        btn.style.transform = `translate(${r.left - canvasBox.left}px, ${r.top - canvasBox.top}px)`;
+        btn.style.width = `${r.width}px`;
+        btn.style.height = `${r.height}px`;
+        if (pendingFocus === i) {
+          pendingFocus = -1;
+          btn.focus({ preventScroll: true });
+        }
+      });
 
       renderer.render(scene, camera);
     }
@@ -1678,6 +1843,7 @@ export function BooksShowcase({
     // Cleanup
     return () => {
       cancelled = true;
+      if (controllerRef) controllerRef.current = null;
       if (rafId) cancelAnimationFrame(rafId);
       timeouts.forEach((id) => clearTimeout(id));
       if (orientationTimeout) clearTimeout(orientationTimeout);
@@ -1717,7 +1883,7 @@ export function BooksShowcase({
       scene.environment = null;
       renderer.dispose();
     };
-  }, [books, showDetailPanel]);
+  }, [books, showDetailPanel, readerMode, controllerRef]);
 
   const themeVars = {
     '--bs-navy': themeColors?.navy ?? '#141a32',
@@ -1756,7 +1922,7 @@ export function BooksShowcase({
       aria-label={`${heroTitle} book showcase`}
       data-state={uiMode}
       className={cn(
-        'book-showcase relative isolate h-full min-h-[560px] overflow-hidden font-sans outline-none [container-type:size] [-webkit-tap-highlight-color:transparent]',
+        'book-showcase relative isolate h-full min-h-[560px] overflow-clip font-sans outline-none [container-type:size] [-webkit-tap-highlight-color:transparent]',
         'focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--bs-peri)]',
         'transition-colors duration-500 ease-out',
         uiMode === 'hero'
@@ -1821,6 +1987,30 @@ export function BooksShowcase({
         </>
       )}
 
+      {/*
+        KRL: a real button over each book, so the shelf works from the keyboard
+        (Tab to a book, Enter or Space to open it) and focus has somewhere to
+        return to when the reader closes. Transparent until focused; the frame
+        loop keeps each one over its book's cover through resizes and motion.
+        `pointer-events-none` leaves pointer hover and drag to the canvas.
+        The root is `overflow-clip`, not `overflow-hidden`: a hidden-overflow box
+        can still be scrolled by focus, and focusing a book button scrolled the
+        whole canvas out of place.
+      */}
+      {books.map((book, i) => (
+        <button
+          key={book.id}
+          ref={(el) => {
+            bookBtnRefs.current[i] = el;
+          }}
+          type="button"
+          aria-label={`Open ${book.title}`}
+          onClick={() => controllerRef?.current?.open(book.id)}
+          className="pointer-events-none absolute left-0 top-0 z-[25] rounded-lg outline-none focus-visible:ring-4 focus-visible:ring-[var(--bs-peri)] focus-visible:ring-offset-2"
+          style={{ visibility: 'hidden' }}
+        />
+      ))}
+
       {/* trailing "open" slip — position is driven by the animation loop via inline style */}
       <button
         ref={openBtnRef}
@@ -1841,6 +2031,7 @@ export function BooksShowcase({
 
       <button
         ref={closeBtnRef}
+        hidden={readerMode}
         aria-label="Close detail view"
         className={`absolute left-1/2 top-[30px] z-40 -translate-x-1/2 inline-flex h-[52px] w-[52px] items-center justify-center rounded-full border-[1.5px] border-[var(--bs-cream)]/40 bg-transparent text-[17px] leading-none text-[var(--bs-cream)] transition-[opacity,border-color] duration-300 delay-150 hover:border-[var(--bs-cream)]/90 @max-[760px]:left-auto @max-[760px]:right-[18px] @max-[760px]:top-[18px] @max-[760px]:translate-x-0 [-webkit-tap-highlight-color:transparent] ${uiMode === 'detail' ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
           }`}

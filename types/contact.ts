@@ -7,7 +7,8 @@ export type ContactChannelType =
   | 'whatsapp'
   | 'location'
   | 'instagram'
-  | 'linkedin';
+  | 'linkedin'
+  | 'x';
 
 /**
  * A single contact route.

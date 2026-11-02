@@ -19,6 +19,19 @@ export const homeContent: HomeContent = {
   dance: {
     eyebrow: 'Motion lab',
     title: 'Robot dance models',
+    /* Labels inside the book reader. */
+    reader: {
+      storyTab: 'Story',
+      movesTab: 'Moves',
+      close: 'Close the book',
+      play: 'Play',
+      pause: 'Pause',
+      mute: 'Mute',
+      unmute: 'Unmute',
+      fullscreen: 'Full screen',
+      seek: 'Seek through the video',
+      bpm: 'BPM',
+    },
     description:
       'Two routines choreographed on the G1 humanoid, set to music from the Telugu film Paradise. Choreography is a stress test with better optics: balance, timing and whole-body coordination, judged on the beat.',
   },

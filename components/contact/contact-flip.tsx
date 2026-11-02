@@ -30,16 +30,18 @@ const LETTERS = ['C', 'O', 'N', 'T', 'A', 'C', 'T'] as const;
 /**
  * Which channel sits under each letter.
  *
- * Email leads because it is the live one; location closes because it is context
- * rather than a destination. The ids are the ones in `data/contact.ts`.
+ * Email leads because it is the one we answer fastest; the social channels
+ * follow, then WhatsApp and phone (which fall back to email until their
+ * numbers are published). Location has no link, so it lives only in the
+ * "Reach us" list. The ids are the ones in `data/contact.ts`.
  */
 const TILE_ORDER = [
   'contact-email',
   'contact-instagram',
   'contact-linkedin',
+  'contact-x',
   'contact-whatsapp',
   'contact-phone',
-  'contact-location',
 ] as const;
 
 /** The email channel — the destination for any tile without one of its own. */
