@@ -91,7 +91,7 @@ CSS variables in `styles/globals.css` (`@layer base`) feed Tailwind via `tailwin
 
 - The `<img>` under the canvas is the fallback: no WebGL or a shader compile failure leaves the photo showing.
 - Deliberate departures from the standalone design: a black fade under the fixed site header (its links were unreadable over the bright letters), the render loop pauses off screen via IntersectionObserver, `touch-action: pan-y` so phones can scroll past, and the design's own 3-link nav is dropped because the site header already provides it.
-- **Fit:** landscape screens show the whole wordmark (`uFit` contain — the bars are invisible because the photo's ground is black); portrait keeps the design's cover crop. The shader, `toTex` pointer mapping, the `<img>` (`landscape:object-contain`) and `.krl-hero-copy` (`min(...)` box maths) must all agree on this — change one, change all four. WebGL2 is preferred so the 2560px photo can be mipmapped; the stepped letter edges are in the source art itself.
+- **Fit:** every screen shows the whole wordmark (`uFit` contain — the bars are invisible because the photo's ground is black). Portrait used to keep the design's cover crop, which on a phone showed a slice of the R and left KRL unreadable. The shader, `toTex` pointer mapping and the `<img>` (`object-contain`) must agree — change one, change all three. WebGL2 is preferred so the 2560px photo can be mipmapped; the stepped letter edges are in the source art itself.
 - **Scroll-over:** GSAP pins the hero with `pinSpacing: false` for one viewport while the stage scales/fades to `HERO_RECEDE`; the `#hero + *` rule in `globals.css` gives the next section the opaque background, z-index, rounded edge and shadow that make it slide over like a page. Reduced motion skips the pin.
 - **Editor:** `.krl-hero-copy` is `pointer-events: none` (so the canvas gets the cursor) except under `html[data-site-editing]`, which is what makes the hero copy selectable and movable in the visual editor.
 - **The hero keeps the design's own colours, not the site palette:** black ground, blue-white fibres, `#F4F7FB`/`#9AA6B8` copy and an outlined `#E9EEF6` CTA. A Lilac & Emerald recolour was tried and reverted at the owner's request — don't re-theme it with the rest of the site. Instrument Sans is loaded as `--font-hero` for this section only.
@@ -141,11 +141,12 @@ An in-browser editor lets the owner restyle, re-word, resize and delete things w
 - **Baking.** `components/editor/site-overrides.tsx` reads the file with `fs` (not `import`, which would hot-reload on every save and wipe undo history) and renders it as a `<style>` plus a pre-paint script that sets `html[data-site-path]` for page-scoped rules. Visitors get edits on first paint with no editor code. Text replacements are applied client-side by `overrides-applier.tsx`.
 - **Safety.** `lib/site-overrides.ts#sanitizeOverrides` whitelists properties and rejects any value containing `;{}<>`, both on save and when baking — the file ends up as raw CSS in every page. The API route (`app/api/site-editor`) also requires a localhost `Host` and `Origin`.
 - **Undo.** Ctrl+Z / Ctrl+Shift+Z within a session; per-element and per-page Revoke in the Changes tab; `data/site-overrides.backup.json` is the file as it stood before the session's first save.
+- **Layout edits are desktop-only.** Width, height, moves, spacing and text size apply from 1024px up (`DESKTOP_ONLY` in `lib/site-overrides.ts`), and a pixel width is emitted as `min(<px>, 100%)`. Edits made on a 1920px screen otherwise pushed phones off-screen. Colours, text and deletions apply everywhere.
 - Edits saved under `npm run edit` show immediately there; a deploy needs a fresh `npm run build` to bake them.
 
 ### Contact form
 
-The form POSTs to `NEXT_PUBLIC_CONTACT_ENDPOINT` (see `.env.example`). **A missing endpoint surfaces an error, never a fake success** — a submission that silently vanishes is the worst of the three outcomes, because the sender believes they were heard.
+The form POSTs to `NEXT_PUBLIC_CONTACT_ENDPOINT` (see `.env.example`). **A missing endpoint hands off to the visitor's email app, never a fake success** — a submission that silently vanishes is the worst of the three outcomes, because the sender believes they were heard.
 
 ### Verification gates
 
@@ -157,7 +158,7 @@ Per-route metadata is composed with `buildMetadata()` in `lib/seo.ts`; the domai
 
 ### Contact form
 
-`components/contact/contact-form.tsx` validates client-side and transmits nothing. Fields are declared in `data/contact.ts`. To wire a backend, replace the `setStatus('success')` branch; loading/error/success states already exist.
+`components/contact/contact-form.tsx` validates client-side. With `NEXT_PUBLIC_CONTACT_ENDPOINT` set it POSTs there; without it, it opens a `mailto:` to the email channel in `data/contact.ts` with every field written into the body, then shows a "press Send in your email app" panel — never a success claim, since the site cannot know the mail was sent. `data/privacy.ts` describes both paths; keep it true if either changes.
 
 ## Code conventions
 

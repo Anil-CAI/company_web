@@ -254,9 +254,9 @@ function startLight(cv: HTMLCanvasElement, src: string): () => void {
     const ra = r.width / r.height;
     let tx = sx;
     let ty = sy;
-    /* Mirrors the shader: contain on landscape, cover on portrait. */
+    /* Mirrors the shader: the photo is contained on every screen. */
     const wide = ra > texAspect;
-    if (ra > 1 ? !wide : wide) ty = ((sy - 0.5) * texAspect) / ra + 0.5;
+    if (!wide) ty = ((sy - 0.5) * texAspect) / ra + 0.5;
     else tx = ((sx - 0.5) * ra) / texAspect + 0.5;
     return [tx, ty];
   };
@@ -404,9 +404,10 @@ function startLight(cv: HTMLCanvasElement, src: string): () => void {
     gl.uniform1i(U.uTex, 0);
     gl.uniform2f(U.uRes, w, hgt);
     gl.uniform1f(U.uTexAspect, texAspect);
-    /* Landscape shows the whole wordmark (the photo's ground is black, so the
-       bars are invisible); portrait keeps the design's crop. */
-    gl.uniform1f(U.uFit, w > hgt ? 1 : 0);
+    /* The whole wordmark on every screen: the photo's ground is black, so the
+       bars are invisible. Portrait used to crop to a slice of the R, which on
+       a phone left KRL unreadable. */
+    gl.uniform1f(U.uFit, 1);
     gl.uniform1f(U.uTime, el);
     gl.uniform1f(U.uMotion, reduce ? 0.3 : 1.0);
     gl.uniform1f(U.uGain, GAIN);
@@ -484,22 +485,29 @@ export function HeroLight() {
     <div ref={frameRef} className="relative h-svh min-h-[480px] w-full overflow-hidden bg-black">
       <div
         ref={stageRef}
-        className="absolute inset-0 origin-center font-[family-name:var(--font-hero)] text-[#E9EEF6] will-change-transform"
+        className="krl-hero-stage absolute inset-0 origin-center font-[family-name:var(--font-hero)] text-[#E9EEF6] will-change-transform"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element -- the shader samples this exact file; it must not be re-encoded or resized */}
-        <img
-          src={heroLight.image}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          className="absolute inset-0 block size-full object-cover landscape:object-contain"
-        />
-        <canvas
-          ref={canvasRef}
-          role="img"
-          aria-label={heroLight.canvasLabel}
-          className="absolute inset-0 block size-full cursor-default touch-pan-y"
-        />
+        {/*
+          The wordmark: photo plus the shader canvas over it. Full-bleed on
+          landscape; on portrait (`.krl-hero-mark` in globals.css) a block at
+          the photo's own proportions, stacked above the copy.
+        */}
+        <div className="krl-hero-mark">
+          {/* eslint-disable-next-line @next/next/no-img-element -- the shader samples this exact file; it must not be re-encoded or resized */}
+          <img
+            src={heroLight.image}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            className="absolute inset-0 block size-full object-contain"
+          />
+          <canvas
+            ref={canvasRef}
+            role="img"
+            aria-label={heroLight.canvasLabel}
+            className="absolute inset-0 block size-full cursor-default touch-pan-y"
+          />
+        </div>
         {/* The site header floats over the bright letters; this keeps its links readable. */}
         <div
           aria-hidden="true"

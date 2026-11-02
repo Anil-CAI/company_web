@@ -9,6 +9,7 @@ import { SiteOverrides } from '@/components/editor/site-overrides';
 import { JsonLd } from '@/components/layout/json-ld';
 import { PageTransition } from '@/components/layout/page-transition';
 import { ScrollToTop } from '@/components/layout/scroll-to-top';
+import { SingleAudio } from '@/components/layout/single-audio';
 import { SkipLink } from '@/components/layout/skip-link';
 import { SmoothScrollProvider } from '@/components/layout/smooth-scroll-provider';
 import { SECTION_IDS } from '@/constants/routes';
@@ -119,6 +120,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           <Footer />
           <ScrollToTop />
+          <SingleAudio />
 
           {/* Renders nothing unless served from localhost by `npm run edit`. */}
           <SiteEditorLoader />

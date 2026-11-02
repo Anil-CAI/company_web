@@ -138,6 +138,37 @@
         "style": {
           "translate": "17px -140px"
         }
+      },
+      "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · There was one more performance we did not …",
+        "style": {
+          "color": "#e3deed"
+        }
+      },
+      "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(2)": {
+        "label": "p · This one was special in a different way. A…",
+        "style": {
+          "color": "#b6b3bd"
+        }
+      },
+      "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(3)": {
+        "label": "p · Two completely different vibes. One robot.…",
+        "style": {
+          "color": "#c3beca"
+        }
+      },
+      "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(4)": {
+        "label": "p · Seeing a humanoid perform songs from our T…",
+        "style": {
+          "translate": "0px -11px",
+          "color": "#cbc9cf"
+        }
+      },
+      "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > canvas:nth-of-type(1)": {
+        "label": "canvas",
+        "style": {
+          "min-height": "558px"
+        }
       }
     },
     "/about": {

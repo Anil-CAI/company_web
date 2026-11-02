@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { contactFields } from '@/data/contact';
+import { contactChannels, contactFields } from '@/data/contact';
 import { contactContent } from '@/data/content';
 import { cn } from '@/lib/utils';
 import type { ContactField } from '@/types/contact';
@@ -26,7 +26,7 @@ const CONTACT_ENDPOINT = process.env.NEXT_PUBLIC_CONTACT_ENDPOINT ?? '';
 
 type FormValues = Record<string, string>;
 type FormErrors = Record<string, string | undefined>;
-type FormStatus = 'idle' | 'submitting' | 'success' | 'error';
+type FormStatus = 'idle' | 'submitting' | 'success' | 'error' | 'handoff';
 
 /** Every field starts as an empty string, so inputs are controlled from render one. */
 function createInitialValues(fields: ContactField[]): FormValues {
@@ -57,9 +57,9 @@ function validate(fields: ContactField[], values: FormValues): FormErrors {
  * Contact form.
  *
  * Fields are declared in `data/contact.ts`, so adding one is a data edit rather
- * than a component change. Validation runs entirely in the browser — there is
- * no backend and nothing is transmitted. Wire `handleSubmit` to an endpoint or
- * a form service when you are ready to receive messages.
+ * than a component change. With `NEXT_PUBLIC_CONTACT_ENDPOINT` set it posts
+ * there; without it, it opens the visitor's email app with the message filled
+ * in and addressed to us.
  */
 export function ContactForm() {
   const content = contactContent.form;
@@ -94,13 +94,22 @@ export function ContactForm() {
       /*
        * Posts to the form endpoint in `NEXT_PUBLIC_CONTACT_ENDPOINT`.
        *
-       * Without it configured the submission would silently vanish, which is
-       * the worst outcome of the three — the sender believes they have been
-       * heard. So a missing endpoint is surfaced as an error rather than a
-       * fake success.
+       * Without one, the message is handed to the visitor's own email app,
+       * written out and addressed to us — a real way to send it, rather than a
+       * dead button. The panel that follows says to press Send there; it never
+       * claims the message was sent, because from here we cannot know.
        */
       if (!CONTACT_ENDPOINT) {
-        setStatus('error');
+        const to = contactChannels.find((channel) => channel.type === 'email')?.href ?? '';
+        if (!to) {
+          setStatus('error');
+          return;
+        }
+        const body = contactFields
+          .map((field) => `${field.label}: ${values[field.name] ?? ''}`)
+          .join('\n\n');
+        window.location.href = `${to}?subject=${encodeURIComponent(content.mailSubject)}&body=${encodeURIComponent(body)}`;
+        setStatus('handoff');
         return;
       }
 
@@ -125,7 +134,7 @@ export function ContactForm() {
         setStatus('error');
       }
     },
-    [values],
+    [values, content.mailSubject],
   );
 
   if (status === 'success') {
@@ -142,7 +151,28 @@ export function ContactForm() {
           </p>
         </div>
         <Button variant="outline" onClick={() => setStatus('idle')}>
-          Write another message
+          {content.anotherLabel}
+        </Button>
+      </div>
+    );
+  }
+
+  if (status === 'handoff') {
+    return (
+      <div
+        role="status"
+        className="flex flex-col items-start gap-6 rounded-2xl border border-border bg-card p-10 shadow-soft"
+      >
+        <Send aria-hidden="true" className="size-8 text-foreground" strokeWidth={1.25} />
+        <div>
+          <h3 className="text-2xl font-medium tracking-tight">{content.handoffTitle}</h3>
+          <p className="mt-3 max-w-prose text-sm leading-relaxed text-muted-foreground text-pretty">
+            {content.handoffBody}
+          </p>
+        </div>
+        {/* The typed message is kept, in case the email app did not open. */}
+        <Button variant="outline" onClick={() => setStatus('idle')}>
+          {content.backLabel}
         </Button>
       </div>
     );
@@ -171,7 +201,10 @@ export function ContactForm() {
           return (
             <div
               key={field.id}
-              className={cn('flex flex-col gap-3', (field.fullWidth || isTextarea) && 'sm:col-span-2')}
+              className={cn(
+                'flex flex-col gap-3',
+                (field.fullWidth || isTextarea) && 'sm:col-span-2',
+              )}
             >
               <Label htmlFor={field.id}>
                 {field.label}

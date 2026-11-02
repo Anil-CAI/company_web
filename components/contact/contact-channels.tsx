@@ -29,7 +29,13 @@ const COLUMN_CLASS = {
  */
 export function ContactChannels({ columns = 2, className }: ContactChannelsProps) {
   return (
-    <ul className={cn('grid gap-px overflow-hidden bg-border', COLUMN_CLASS[columns], className)}>
+    <ul
+      className={cn(
+        'grid grid-cols-1 gap-px overflow-hidden bg-border',
+        COLUMN_CLASS[columns],
+        className,
+      )}
+    >
       {contactChannels.map((channel) => (
         <li key={channel.id} className="bg-background">
           <ContactChannelRow channel={channel} />
@@ -56,7 +62,8 @@ function ContactChannelRow({ channel }: ContactChannelRowProps) {
         className={cn(
           'flex size-11 shrink-0 items-center justify-center rounded-xl border border-border bg-secondary/50',
           'transition-colors duration-500 ease-premium',
-          isLive && 'group-hover/channel:border-transparent group-hover/channel:bg-foreground group-hover/channel:text-background',
+          isLive &&
+            'group-hover/channel:border-transparent group-hover/channel:bg-foreground group-hover/channel:text-background',
         )}
       >
         <Icon className="size-[18px]" strokeWidth={1.5} />

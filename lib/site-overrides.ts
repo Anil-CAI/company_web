@@ -157,14 +157,47 @@ export function sanitizeOverrides(input: unknown): SiteOverrides {
   return out;
 }
 
+/**
+ * Properties that encode a layout chosen on a desktop screen. Pixel widths,
+ * offsets and big type picked at 1920px wide push a phone layout off-screen,
+ * so these apply from `DESKTOP_MIN` up; colours, text and deletions apply at
+ * every width.
+ */
+const DESKTOP_ONLY = new Set<string>([
+  'width',
+  'max-width',
+  'min-height',
+  'translate',
+  'margin-top',
+  'margin-bottom',
+  'padding-top',
+  'padding-right',
+  'padding-bottom',
+  'padding-left',
+  'font-size',
+  'letter-spacing',
+  'line-height',
+]);
+export const DESKTOP_MIN = 1024;
+
 function ruleFor(prefix: string, selector: string, o: ElementOverride): string {
-  let decls = '';
+  let everywhere = '';
+  let desktop = '';
   for (const [prop, value] of Object.entries(o.style ?? {})) {
-    decls += `${prop}:${value} !important;`;
+    /* A width can never exceed its container, so no edit can widen the page. */
+    const v = prop === 'width' && value.endsWith('px') ? `min(${value}, 100%)` : value;
+    if (DESKTOP_ONLY.has(prop)) desktop += `${prop}:${v} !important;`;
+    else everywhere += `${prop}:${v} !important;`;
   }
   /* Last, so a hidden element stays hidden even if `display` was also set. */
-  if (o.hidden) decls += 'display:none !important;';
-  return decls ? `${prefix}${selector}{${decls}}` : '';
+  if (o.hidden) everywhere += 'display:none !important;';
+  const rule = `${prefix}${selector}`;
+  return [
+    everywhere ? `${rule}{${everywhere}}` : '',
+    desktop ? `@media (min-width:${DESKTOP_MIN}px){${rule}{${desktop}}}` : '',
+  ]
+    .filter(Boolean)
+    .join('\n');
 }
 
 /**

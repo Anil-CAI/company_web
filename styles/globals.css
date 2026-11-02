@@ -119,6 +119,16 @@
     overflow: hidden;
   }
 
+  /*
+   * No sideways scroll, ever. `clip` rather than `hidden`: it trims overflow
+   * without making <html>/<body> a scroll container, which would break Lenis,
+   * `position: sticky` and the pinned hero.
+   */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings:
@@ -484,6 +494,13 @@
     pointer-events: auto;
   }
 
+  /* Full-bleed by default; the portrait rule below turns it into a block.
+     Kept here rather than as utility classes so that rule can override it. */
+  .krl-hero-mark {
+    position: absolute;
+    inset: 0;
+  }
+
   /* In the visual editor the copy must be clickable, so it can be selected,
      moved and restyled like everything else. */
   html[data-site-editing] .krl-hero-copy {
@@ -508,18 +525,38 @@
     box-shadow: 0 -28px 60px rgb(42 30 64 / 0.55);
   }
 
+  /*
+   * Portrait (phones): a stack, not an overlay. The wordmark sits under the
+   * header at the photo's exact proportions — so it fills the width with no
+   * dead black band — and the copy follows in normal flow, the pair centred
+   * in the screen. The old floating card overlapped the bottom of the letters.
+   * Gaps and type scale with height so a short phone still fits.
+   */
   @media (max-aspect-ratio: 1/1) {
+    .krl-hero-stage {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(1.25rem, 5svh, 3rem);
+      padding: calc(var(--header-height) + 0.5rem) 0 clamp(1rem, 4svh, 2.5rem);
+    }
+
+    .krl-hero-mark {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      aspect-ratio: 2560 / 1663;
+      flex-shrink: 0;
+    }
+
     .krl-hero-copy {
-      left: 20px;
-      right: 20px;
+      position: relative;
+      left: auto;
       top: auto;
-      bottom: 20px;
       width: auto;
       height: auto;
-      font-size: 15px;
-      background: rgba(0, 0, 0, 0.78);
-      padding: 20px;
-      border-radius: 14px;
+      margin: 0 24px;
+      font-size: clamp(14px, 2.1svh, 17px);
     }
 
     .krl-hero-spacer {

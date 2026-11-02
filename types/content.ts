@@ -58,6 +58,13 @@ export interface ContactContent {
     successBody: string;
     /** Shown when the submission fails — must name a fallback address. */
     errorBody: string;
+    /** Subject line when the message is handed to the visitor's email app. */
+    mailSubject: string;
+    /** Shown after handing off to the email app — never claims it was sent. */
+    handoffTitle: string;
+    handoffBody: string;
+    backLabel: string;
+    anotherLabel: string;
     /** Shown under the form at rest. */
     disclaimer: string;
   };

@@ -131,6 +131,13 @@ export function StaggeredGrid({
     useEffect(() => {
         if (!isLoaded) return
 
+        /*
+         * KRL fix: everything below is built inside a gsap.context, so cleanup
+         * reverts it completely. Killing only the ScrollTriggers (as before)
+         * left the `from()` tweens' inline `opacity: 0; visibility: hidden` on
+         * the tiles, so coming back to the page could show an empty wall.
+         */
+        const ctx = gsap.context(() => {
         // Animate Text Element
         if (textRef.current) {
             const chars = textRef.current.querySelectorAll('.char')
@@ -234,7 +241,13 @@ export function StaggeredGrid({
                 // Animate Bento Container to move down and scale
                 tl.to(bentoContainer, {
                     y: window.innerHeight * 0.1, // Move down relative to grid
-                    scale: 1.5, // Scale up the whole group
+                    /*
+                     * KRL change: on a phone the grid has 3 columns, so the
+                     * 3-column bento block is already full width and 1.5x
+                     * pushed it past both edges of the screen. It only grows
+                     * where it starts narrower than the grid.
+                     */
+                    scale: window.matchMedia('(min-width: 640px)').matches ? 1.5 : 1,
                     zIndex: 1000,
                     ease: 'power2.out', // Smooth easing
                     duration: 1,
@@ -243,36 +256,17 @@ export function StaggeredGrid({
             }
         }
 
+        })
+
         /*
-         * KRL additions, both required in this project:
-         *
-         * 1. `ScrollTrigger.refresh()`. These triggers are created after the
-         *    images finish loading, by which point ScrollTrigger has already
-         *    measured the document — so every start/end was computed against a
-         *    stale page height and nothing fired on scroll. Refreshing makes it
-         *    re-measure now that the grid occupies its real space.
-         * 2. Cleanup. The original left its ScrollTriggers alive on unmount,
-         *    which leaks a trigger per navigation and leaves them firing
-         *    against detached nodes.
+         * The triggers are created after the images finish loading, by which
+         * point ScrollTrigger has already measured the document, so re-measure
+         * now. Later layout shifts are handled site-wide by the refresh in
+         * `SmoothScrollProvider`.
          */
         ScrollTrigger.refresh()
 
-        /* Captured now: by cleanup time the refs may already point elsewhere. */
-        const gridEl = gridFullRef.current
-        const textEl = textRef.current
-
-        return () => {
-            ScrollTrigger.getAll().forEach((trigger) => {
-                const el = trigger.trigger
-                if (!el) return
-                const owned =
-                    el === gridEl ||
-                    el === textEl ||
-                    gridEl?.contains(el) === true ||
-                    textEl?.contains(el) === true
-                if (owned) trigger.kill()
-            })
-        }
+        return () => ctx.revert()
     }, [isLoaded, scroller])
 
     // Prepare grid items: fill up to the end of Row 3 (21 slots)

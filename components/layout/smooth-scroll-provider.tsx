@@ -47,5 +47,36 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     };
   }, [prefersReducedMotion]);
 
+  /*
+   * Keep every ScrollTrigger measured against the page as it really is.
+   *
+   * Triggers record their start/end once, when created. Content above them
+   * keeps settling afterwards — the dance shelf's WebGL, video metadata, late
+   * images, fonts — so a section further down would fire at a stale position
+   * and sit blank in view (the Domains wall did, intermittently, depending on
+   * what finished loading first). Re-measure whenever the document height
+   * actually changes; the debounce and height check stop a refresh from
+   * re-triggering itself. Runs with or without Lenis, since native scrolling
+   * has the same problem.
+   */
+  React.useEffect(() => {
+    let lastHeight = document.documentElement.scrollHeight;
+    let timer = 0;
+    const observer = new ResizeObserver(() => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        const height = document.documentElement.scrollHeight;
+        if (Math.abs(height - lastHeight) < 2) return;
+        lastHeight = height;
+        ScrollTrigger.refresh();
+      }, 200);
+    });
+    observer.observe(document.body);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+    };
+  }, []);
+
   return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
 }

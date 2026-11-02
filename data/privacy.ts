@@ -34,7 +34,7 @@ export const privacyPolicy: PrivacyPolicy = {
       id: 'how-it-is-handled',
       heading: 'How it is handled',
       body: [
-        'Submissions are delivered to our email inbox through a third-party form service, which passes the message on and keeps a copy of it so we can retrieve it if delivery fails. The message travels over an encrypted connection.',
+        'Submissions are delivered to our email inbox through a third-party form service, which passes the message on and keeps a copy of it so we can retrieve it if delivery fails. The message travels over an encrypted connection. If that service is not available, the form instead opens your own email app with the message written out, and it is sent only when you press Send there.',
         'Enquiries stay in our inbox for as long as the conversation is useful. When it is clearly finished, we delete it.',
       ],
     },
