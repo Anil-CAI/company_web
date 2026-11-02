@@ -57,7 +57,7 @@ Data files reference icons as strings (`icon: 'mail'`) resolved through `iconReg
 - **GSAP + ScrollTrigger** — only for scroll-scrubbed work (count-ups, parallax, timeline draws). Always import from `@/lib/gsap` (registers the plugin, browser-guarded), never from `gsap` directly.
 - **Lenis** — `SmoothScrollProvider` (root layout) drives Lenis from the **GSAP ticker** so scroll position and ScrollTrigger advance on the same frame. Use `useLenis()` / `useScrollTo()` from `hooks/use-lenis.ts` for programmatic scrolling; both fall back to native when Lenis is null.
 - All durations, easings, stagger and Lenis options live in `constants/animation.ts` — no magic numbers in components.
-- **Reduced motion**: Lenis never initialises (context stays `null`), GSAP effects must be skipped by consumers, and `globals.css` collapses CSS animations. New motion must degrade the same way.
+- **Reduced motion**: Lenis never initialises (context stays `null`), GSAP effects must be skipped by consumers, `globals.css` collapses CSS animations, and `<MotionConfig reducedMotion="user">` in `SmoothScrollProvider` stops every Framer Motion reveal from sliding (opacity still fades). New motion must degrade the same way.
 
 ### Design tokens
 
@@ -125,6 +125,8 @@ The figures are jointed SVG stick figures, not 3D models — deliberately, to av
 
 `components/services/service-platforms-section.tsx` over `data/services.ts`. Each `Service` carries `platforms: ('go2'|'g1'|'other')[]`, and a service can appear under more than one — most of the stack runs on both robots, so duplicating entries would mean two places to edit one piece of copy. `platformNotes` overrides the one-liner where the offer genuinely differs per platform (Go2 VR is teleoperation + robot-perspective view only; G1 VR adds training and maintenance).
 
+Each service renders as `ServiceCard` (`components/services/service-card.tsx`) — the same card the site uses everywhere: icon tile, title, copy, a hover folder listing the stack, and "Learn more". `description` overrides the generic line with the per-robot `platformNotes`. (A pop-colour bento grid was tried and dropped at the owner's request.)
+
 The hero hands over to `platform-picker.tsx`: three picture cards (Go2 / G1 / Other) that anchor down to their section. Pictures beat text pills here — a visitor recognises the quadruped on sight faster than they parse a model name. They are plain `<a href="#platform-go2">` anchors, so they work before hydration and keep every service in the document.
 
 **Every group renders in full — do not convert this to tabs.** Tabs would hide half the catalogue behind a click most visitors never make, and the hidden half would be invisible to search engines. The jump links are plain `<a href="#platform-go2">` anchors so they work before hydration and on mobile, where a hover-reveal would not.
@@ -137,7 +139,9 @@ KRL does **not** do hardware work, so there is no "Robotics Engineering" service
 
 **The thin fields are deliberate.** `TeamMember.focus` is a domain, not a job title, and `note`/`image` are optional — the company was founded by students and the titles are not settled, so inventing "Lead Perception Engineer" would be a detail a visitor could check and find wrong. `TeamPortrait` falls back to an initials monogram rather than an empty photo frame, so a page with no headshots reads as a choice rather than as unfinished; set `image.src` on one member and that person alone gets a photograph. The closing `note` says the named members are part of a wider team, so four cards never imply the whole company.
 
-The principles section renders `company.principles`, which already existed in `data/company.ts` but had no page rendering them.
+The team grid is the vendored `team-reveal-grid.tsx`, rendered with `showHeader={false}` (the section already has a heading; its built-in one was stock demo copy). Its accent is the deep emerald `#0D7651`; initials are solid ink (not `mix-blend-difference`, which turned them cyan) and fade out while a card is open so its description reads cleanly in `#F7F3FB`.
+
+The principles section renders `company.principles` (plain-language copy: what each rule means for a client), which already existed in `data/company.ts` but had no page rendering them.
 
 ### Privacy policy
 

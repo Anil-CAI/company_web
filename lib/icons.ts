@@ -49,6 +49,7 @@ import {
   Waypoints,
   Workflow,
   Zap,
+  createLucideIcon,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -59,6 +60,22 @@ import {
  * to edit. Components resolve the key through {@link getIcon}. Adding an icon
  * is a one-line change here — the `IconName` union updates automatically.
  */
+/*
+ * WhatsApp has no lucide icon. This is Tabler's MIT-licensed "brand-whatsapp"
+ * outline (a speech bubble with a handset), built with lucide's own factory so
+ * it takes the same props and stroke as every other icon here.
+ */
+const Whatsapp = createLucideIcon('Whatsapp', [
+  ['path', { d: 'M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9', key: 'bubble' }],
+  [
+    'path',
+    {
+      d: 'M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1',
+      key: 'handset',
+    },
+  ],
+]);
+
 export const iconRegistry = {
   activity: Activity,
   'arrow-right': ArrowRight,
@@ -90,6 +107,7 @@ export const iconRegistry = {
   map: Map,
   'map-pin': MapPin,
   message: MessageCircle,
+  whatsapp: Whatsapp,
   microscope: Microscope,
   move3d: Move3d,
   network: Network,

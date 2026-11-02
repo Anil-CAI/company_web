@@ -1,9 +1,12 @@
 'use client';
 
+import { Send } from 'lucide-react';
 import * as React from 'react';
 
 import SocialFlipButton, { type SocialItem } from '@/components/ui/social-flip-button';
+import { SECTION_IDS } from '@/constants/routes';
 import { contactChannels } from '@/data/contact';
+import { contactContent } from '@/data/content';
 import { getIcon } from '@/lib/icons';
 import type { ContactChannel } from '@/types/contact';
 import { hasValue } from '@/utils/media';
@@ -53,15 +56,7 @@ export function ContactFlip() {
       contactChannels.find((channel) => channel.id === id),
     ).filter((channel): channel is ContactChannel => Boolean(channel));
 
-    /*
-     * Six channels across seven letters, so the last letter repeats the email
-     * tile — a second, larger target for the action we most want. If a channel
-     * is ever added to the data this slot fills itself instead.
-     */
-    const ordered = [...tiles];
-    while (ordered.length < LETTERS.length && email) ordered.push(email);
-
-    return ordered.slice(0, LETTERS.length).map((channel, index) => {
+    const channelItems = tiles.map((channel, index) => {
       const Icon = getIcon(channel.icon);
       const live = hasValue(channel.href);
 
@@ -73,7 +68,22 @@ export function ContactFlip() {
         href: live ? channel.href : fallback,
       };
     });
+
+    /*
+     * Six channels across seven letters. The last letter used to repeat the
+     * email tile, which read as a mistake (two identical mail icons); it now
+     * jumps to the message form further down the page.
+     */
+    return [
+      ...channelItems,
+      {
+        letter: LETTERS[channelItems.length],
+        icon: <Send className="size-4" aria-hidden="true" />,
+        label: contactContent.form.title,
+        href: `#${SECTION_IDS.contactForm}`,
+      },
+    ].slice(0, LETTERS.length);
   }, []);
 
-  return <SocialFlipButton items={items} className="p-0" />;
+  return <SocialFlipButton items={items} className="justify-start p-0" />;
 }

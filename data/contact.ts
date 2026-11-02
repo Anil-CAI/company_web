@@ -22,7 +22,7 @@ export const contactChannels: ContactChannel[] = [
     value: '\u2715',
     placeholder: 'Add WhatsApp number',
     href: '',
-    icon: 'message',
+    icon: 'whatsapp',
   },
   {
     id: 'contact-instagram',

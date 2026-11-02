@@ -59,7 +59,8 @@ export function AboutTeamSection() {
       <TeamRevealGrid
         members={revealMembers}
         autoPlay
-        className="mt-20"
+        showHeader={false}
+        className="mt-12 sm:mt-20"
       />
 
       <Reveal className="mt-12">

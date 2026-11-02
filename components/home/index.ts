@@ -9,4 +9,3 @@ export { DomainsSection } from '@/components/home/domains-section';
 export { FeaturedProjectsSection } from '@/components/home/featured-projects-section';
 export { HeroLight } from '@/components/home/hero-light';
 export { HeroSection } from '@/components/home/hero-section';
-export { ServicesPreviewSection } from '@/components/home/services-preview-section';

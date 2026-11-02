@@ -13,6 +13,8 @@ import type { Service } from '@/types/service';
 
 interface ServiceCardProps {
   service: Service;
+  /** Overrides `shortDescription` — the services page passes per-robot copy. */
+  description?: string;
   className?: string;
 }
 
@@ -29,7 +31,7 @@ interface ServiceCardProps {
  * touch screen and a screen reader never sees it. Nothing is behind the hover
  * that is only behind the hover.
  */
-export function ServiceCard({ service, className }: ServiceCardProps) {
+export function ServiceCard({ service, description, className }: ServiceCardProps) {
   /*
    * The folder's tooltip lists at most six entries, so cap what is handed to
    * it. The screen-reader list below is never capped.
@@ -88,7 +90,7 @@ export function ServiceCard({ service, className }: ServiceCardProps) {
       </h3>
 
       <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-        {service.shortDescription}
+        {description ?? service.shortDescription}
       </p>
 
       {/* The accessible counterpart to the folder. */}

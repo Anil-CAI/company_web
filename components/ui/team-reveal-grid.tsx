@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import * as React from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 export interface TeamRevealMember {
   /** Stable identifier used by the controlled active state. */
@@ -20,8 +20,10 @@ export interface TeamRevealMember {
   accent?: string;
 }
 
-export interface TeamRevealGridProps
-  extends Omit<React.ComponentPropsWithoutRef<"section">, "title"> {
+export interface TeamRevealGridProps extends Omit<
+  React.ComponentPropsWithoutRef<'section'>,
+  'title'
+> {
   eyebrow?: string;
   title?: string;
   description?: string;
@@ -34,50 +36,52 @@ export interface TeamRevealGridProps
   /** Automatically moves the reveal between members when idle. */
   autoPlay?: boolean;
   rotationInterval?: number;
+  /** KRL addition: omit the built-in heading when the page already has one. */
+  showHeader?: boolean;
 }
 
 const DEFAULT_MEMBERS: readonly TeamRevealMember[] = [
   {
-    id: "maya-chen",
-    name: "Maya Chen",
-    role: "Product Engineer",
-    expertise: "Turns early product ideas into fast, resilient interfaces.",
-    accent: "#fb4f43",
+    id: 'maya-chen',
+    name: 'Maya Chen',
+    role: 'Product Engineer',
+    expertise: 'Turns early product ideas into fast, resilient interfaces.',
+    accent: '#fb4f43',
   },
   {
-    id: "noah-williams",
-    name: "Noah Williams",
-    role: "Infrastructure",
-    expertise: "Keeps deployments observable, secure, and quietly reliable.",
-    accent: "#ff7a45",
+    id: 'noah-williams',
+    name: 'Noah Williams',
+    role: 'Infrastructure',
+    expertise: 'Keeps deployments observable, secure, and quietly reliable.',
+    accent: '#ff7a45',
   },
   {
-    id: "amina-patel",
-    name: "Amina Patel",
-    role: "Backend Engineer",
-    expertise: "Designs APIs and data systems that scale without drama.",
-    accent: "#f04f78",
+    id: 'amina-patel',
+    name: 'Amina Patel',
+    role: 'Backend Engineer',
+    expertise: 'Designs APIs and data systems that scale without drama.',
+    accent: '#f04f78',
   },
   {
-    id: "leo-martin",
-    name: "Leo Martin",
-    role: "AI Engineer",
-    expertise: "Ships useful AI workflows from prototype to production.",
-    accent: "#8b5cf6",
+    id: 'leo-martin',
+    name: 'Leo Martin',
+    role: 'AI Engineer',
+    expertise: 'Ships useful AI workflows from prototype to production.',
+    accent: '#8b5cf6',
   },
   {
-    id: "sana-ibrahim",
-    name: "Sana Ibrahim",
-    role: "Design Engineer",
-    expertise: "Builds expressive systems where design and code meet.",
-    accent: "#3b82f6",
+    id: 'sana-ibrahim',
+    name: 'Sana Ibrahim',
+    role: 'Design Engineer',
+    expertise: 'Builds expressive systems where design and code meet.',
+    accent: '#3b82f6',
   },
   {
-    id: "eli-brooks",
-    name: "Eli Brooks",
-    role: "Developer Experience",
-    expertise: "Makes complex tools feel obvious, documented, and fast.",
-    accent: "#14b8a6",
+    id: 'eli-brooks',
+    name: 'Eli Brooks',
+    role: 'Developer Experience',
+    expertise: 'Makes complex tools feel obvious, documented, and fast.',
+    accent: '#14b8a6',
   },
 ];
 
@@ -86,32 +90,33 @@ function initials(name: string) {
     .split(/\s+/)
     .slice(0, 2)
     .map((part) => part.charAt(0))
-    .join("")
+    .join('')
     .toUpperCase();
 }
 
 function Portrait({ member, active }: { member: TeamRevealMember; active: boolean }) {
   const style = {
-    "--team-accent": member.accent ?? "#fb4f43",
+    '--team-accent': member.accent ?? '#0D7651',
   } as React.CSSProperties;
 
   return (
     <div
       style={style}
       className={cn(
-        "relative h-full overflow-hidden rounded-[1.05rem] bg-ink-100 transition-colors duration-500 dark:bg-foreground",
-        active && "bg-[color-mix(in_srgb,var(--team-accent)_10%,white)] dark:bg-[color-mix(in_srgb,var(--team-accent)_13%,#0a0a0a)]",
+        'relative h-full overflow-hidden rounded-[1.05rem] bg-ink-100 transition-colors duration-500 dark:bg-foreground',
+        active &&
+          'bg-[color-mix(in_srgb,var(--team-accent)_10%,white)] dark:bg-[color-mix(in_srgb,var(--team-accent)_13%,#0a0a0a)]',
       )}
     >
       <div
         aria-hidden="true"
         className={cn(
-          "absolute inset-0 opacity-55 transition-opacity duration-500",
-          active && "opacity-100",
+          'absolute inset-0 opacity-55 transition-opacity duration-500',
+          active && 'opacity-100',
         )}
         style={{
           background:
-            "radial-gradient(circle at 68% 20%, color-mix(in srgb, var(--team-accent) 36%, transparent), transparent 36%), radial-gradient(circle at 22% 82%, color-mix(in srgb, var(--team-accent) 16%, transparent), transparent 42%)",
+            'radial-gradient(circle at 68% 20%, color-mix(in srgb, var(--team-accent) 36%, transparent), transparent 36%), radial-gradient(circle at 22% 82%, color-mix(in srgb, var(--team-accent) 16%, transparent), transparent 42%)',
         }}
       />
 
@@ -124,28 +129,38 @@ function Portrait({ member, active }: { member: TeamRevealMember; active: boolea
           loading="lazy"
           draggable={false}
           className={cn(
-            "absolute inset-0 h-full w-full object-cover grayscale transition-[filter,transform,opacity] duration-500 ease-out motion-reduce:transition-none",
-            active ? "scale-[1.02] grayscale-0" : "scale-100 grayscale",
+            'absolute inset-0 h-full w-full object-cover grayscale transition-[filter,transform,opacity] duration-500 ease-out motion-reduce:transition-none',
+            active ? 'scale-[1.02] grayscale-0' : 'scale-100 grayscale',
           )}
-          style={{ objectPosition: member.imagePosition ?? "center top" }}
+          style={{ objectPosition: member.imagePosition ?? 'center top' }}
         />
       ) : (
         <div className="absolute inset-0 flex flex-col items-center justify-end overflow-hidden">
           <div
             aria-hidden="true"
             className={cn(
-              "absolute top-[13%] aspect-square h-[36%] rounded-full bg-ink-300 transition-[transform,background-color] duration-500 dark:bg-ink-700",
-              active && "-translate-y-0.5 scale-105 bg-[var(--team-accent)]",
+              'absolute top-[13%] aspect-square h-[36%] rounded-full bg-ink-300 transition-[transform,background-color] duration-500 dark:bg-ink-700',
+              active && '-translate-y-0.5 scale-105 bg-[var(--team-accent)]',
             )}
           />
           <div
             aria-hidden="true"
             className={cn(
-              "absolute -bottom-[12%] h-[66%] w-[82%] rounded-t-[48%] bg-ink-300/90 transition-[transform,background-color] duration-500 dark:bg-ink-700/90",
-              active && "scale-105 bg-[var(--team-accent)]",
+              'absolute -bottom-[12%] h-[66%] w-[82%] rounded-t-[48%] bg-ink-300/90 transition-[transform,background-color] duration-500 dark:bg-ink-700/90',
+              active && 'scale-105 bg-[var(--team-accent)]',
             )}
           />
-          <span className="relative z-10 mb-[18%] text-2xl font-semibold tracking-[-0.08em] text-background mix-blend-difference">
+          {/*
+            KRL change: solid, high-contrast initials. `mix-blend-difference`
+            turned them cyan over the accent figure; and they step aside when
+            the card opens, so the description is not printed over them.
+          */}
+          <span
+            className={cn(
+              'relative z-10 mb-[16%] text-3xl font-semibold tracking-[-0.06em] transition-opacity duration-300',
+              active ? 'text-[#F7F3FB] opacity-0' : 'text-[#2A1E40] opacity-100',
+            )}
+          >
             {initials(member.name)}
           </span>
         </div>
@@ -154,8 +169,8 @@ function Portrait({ member, active }: { member: TeamRevealMember; active: boolea
       <div
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500",
-          active ? "opacity-100" : "opacity-0",
+          'pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-500',
+          active ? 'opacity-100' : 'opacity-0',
         )}
       />
     </div>
@@ -163,14 +178,15 @@ function Portrait({ member, active }: { member: TeamRevealMember; active: boolea
 }
 
 export function TeamRevealGrid({
-  eyebrow = "The people behind the product",
-  title = "Meet the team",
-  description = "A small, multidisciplinary team building thoughtful tools for ambitious people.",
+  eyebrow = 'The people behind the product',
+  title = 'Meet the team',
+  description = 'A small, multidisciplinary team building thoughtful tools for ambitious people.',
   members = DEFAULT_MEMBERS,
   activeMemberId,
   defaultActiveMemberId,
   onActiveMemberChange,
   autoPlay = true,
+  showHeader = true,
   rotationInterval = 2800,
   className,
   ...props
@@ -197,13 +213,16 @@ export function TeamRevealGrid({
 
   useEffect(() => {
     if (!autoPlay || interacting || members.length < 2) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    const timer = window.setInterval(() => {
-      const currentIndex = members.findIndex((member) => member.id === resolvedActiveId);
-      const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % members.length;
-      selectMember(members[nextIndex]?.id ?? null);
-    }, Math.max(rotationInterval, 1200));
+    const timer = window.setInterval(
+      () => {
+        const currentIndex = members.findIndex((member) => member.id === resolvedActiveId);
+        const nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % members.length;
+        selectMember(members[nextIndex]?.id ?? null);
+      },
+      Math.max(rotationInterval, 1200),
+    );
 
     return () => window.clearInterval(timer);
   }, [autoPlay, interacting, members, resolvedActiveId, rotationInterval, selectMember]);
@@ -211,7 +230,7 @@ export function TeamRevealGrid({
   return (
     <section
       className={cn(
-        "@container relative h-full min-h-[620px] w-full overflow-x-hidden overflow-y-auto bg-card px-4 py-10 text-foreground dark:bg-foreground dark:text-background sm:px-7 sm:py-12",
+        '@container relative h-full w-full overflow-x-hidden overflow-y-auto bg-card px-4 py-10 text-foreground dark:bg-foreground dark:text-background sm:px-7 sm:py-12',
         className,
       )}
       {...props}
@@ -221,63 +240,90 @@ export function TeamRevealGrid({
         className="pointer-events-none absolute inset-0 opacity-[0.035] dark:opacity-[0.075]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at center, currentColor 0.7px, transparent 0.8px)",
-          backgroundSize: "12px 12px",
+            'radial-gradient(circle at center, currentColor 0.7px, transparent 0.8px)',
+          backgroundSize: '12px 12px',
         }}
       />
 
       <div className="relative mx-auto w-full max-w-5xl">
-        <header className="mx-auto mb-8 max-w-2xl text-center">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground dark:text-ink-400">
-            {eyebrow}
-          </p>
-          <h2 className="text-balance text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">
-            <span className="relative inline-block">
-              <span className="relative z-10">{title}</span>
-              <svg
-                aria-hidden="true"
-                className="absolute -bottom-3 left-0 h-3 w-full text-[#fb4f43] sm:-bottom-4 sm:h-4"
-                viewBox="0 0 100 20"
-                preserveAspectRatio="none"
-                fill="none"
-              >
-                <path d="M2 12 Q35 2 95 10" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" pathLength="1">
-                  <animate attributeName="stroke-dasharray" values="0 1;1 0" dur="700ms" fill="freeze" />
-                </path>
-                <path d="M5 15 Q40 18 98 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" pathLength="1">
-                  <animate attributeName="stroke-dasharray" values="0 1;1 0" dur="800ms" begin="120ms" fill="freeze" />
-                </path>
-              </svg>
-            </span>
-          </h2>
-          <p className="mx-auto mt-6 max-w-xl text-pretty text-sm leading-6 text-muted-foreground dark:text-ink-400">
-            {description}
-          </p>
-        </header>
+        {showHeader ? (
+          <header className="mx-auto mb-8 max-w-2xl text-center">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-muted-foreground dark:text-ink-400">
+              {eyebrow}
+            </p>
+            <h2 className="text-balance text-3xl font-semibold tracking-[-0.045em] sm:text-4xl">
+              <span className="relative inline-block">
+                <span className="relative z-10">{title}</span>
+                <svg
+                  aria-hidden="true"
+                  className="absolute -bottom-3 left-0 h-3 w-full text-[#fb4f43] sm:-bottom-4 sm:h-4"
+                  viewBox="0 0 100 20"
+                  preserveAspectRatio="none"
+                  fill="none"
+                >
+                  <path
+                    d="M2 12 Q35 2 95 10"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    pathLength="1"
+                  >
+                    <animate
+                      attributeName="stroke-dasharray"
+                      values="0 1;1 0"
+                      dur="700ms"
+                      fill="freeze"
+                    />
+                  </path>
+                  <path
+                    d="M5 15 Q40 18 98 5"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    pathLength="1"
+                  >
+                    <animate
+                      attributeName="stroke-dasharray"
+                      values="0 1;1 0"
+                      dur="800ms"
+                      begin="120ms"
+                      fill="freeze"
+                    />
+                  </path>
+                </svg>
+              </span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-pretty text-sm leading-6 text-muted-foreground dark:text-ink-400">
+              {description}
+            </p>
+          </header>
+        ) : null}
 
-        <ul className="grid grid-cols-2 gap-x-3 gap-y-6 @min-[560px]:grid-cols-3 @min-[560px]:gap-x-5 @min-[560px]:gap-y-5">
+        <ul
+          className={cn(
+            'grid grid-cols-2 gap-x-3 gap-y-6 @min-[560px]:gap-x-5 @min-[560px]:gap-y-5',
+            members.length > 2 ? '@min-[560px]:grid-cols-3' : 'mx-auto max-w-lg',
+          )}
+        >
           {members.map((member) => {
             const active = member.id === resolvedActiveId;
             const detailsId = `team-member-${member.id}-details`;
 
             return (
-              <li
-                key={member.id}
-                className="relative min-h-52 min-w-0 @min-[560px]:min-h-52"
-              >
+              <li key={member.id} className="relative min-h-52 min-w-0 @min-[560px]:min-h-52">
                 <button
                   type="button"
                   aria-expanded={active}
                   aria-controls={detailsId}
                   onClick={() => selectMember(member.id)}
                   onPointerEnter={(event) => {
-                    if (event.pointerType === "mouse") {
+                    if (event.pointerType === 'mouse') {
                       setInteracting(true);
                       selectMember(member.id);
                     }
                   }}
                   onPointerLeave={(event) => {
-                    if (event.pointerType === "mouse") setInteracting(false);
+                    if (event.pointerType === 'mouse') setInteracting(false);
                   }}
                   onFocus={() => {
                     setInteracting(true);
@@ -287,19 +333,19 @@ export function TeamRevealGrid({
                   className="group block w-full rounded-[1.35rem] text-left outline-none"
                 >
                   <div
-                    style={{ "--team-accent": member.accent ?? "#fb4f43" } as React.CSSProperties}
+                    style={{ '--team-accent': member.accent ?? '#0D7651' } as React.CSSProperties}
                     className={cn(
-                      "relative overflow-hidden rounded-[1.35rem] border bg-card p-1.5 shadow-[0_10px_35px_-24px_rgba(0,0,0,0.42)] transition-[border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none dark:bg-foreground",
+                      'relative overflow-hidden rounded-[1.35rem] border bg-card p-1.5 shadow-[0_10px_35px_-24px_rgba(0,0,0,0.42)] transition-[border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none dark:bg-foreground',
                       active
-                        ? "-translate-y-1 border-[color-mix(in_srgb,var(--team-accent)_55%,transparent)] shadow-[0_22px_48px_-28px_color-mix(in_srgb,var(--team-accent)_55%,transparent)]"
-                        : "border-black/10 dark:border-white/10",
-                      "focus-visible:ring-2 focus-visible:ring-[var(--team-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-background",
+                        ? '-translate-y-1 border-[color-mix(in_srgb,var(--team-accent)_55%,transparent)] shadow-[0_22px_48px_-28px_color-mix(in_srgb,var(--team-accent)_55%,transparent)]'
+                        : 'border-black/10 dark:border-white/10',
+                      'focus-visible:ring-2 focus-visible:ring-[var(--team-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-background',
                     )}
                   >
                     <div
                       className={cn(
-                        "h-28 transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none @min-[560px]:h-32",
-                        active && "h-40 @min-[560px]:h-44",
+                        'h-28 transition-[height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none @min-[560px]:h-32',
+                        active && 'h-40 @min-[560px]:h-44',
                       )}
                     >
                       <Portrait member={member} active={active} />
@@ -308,11 +354,12 @@ export function TeamRevealGrid({
                     <div
                       id={detailsId}
                       className={cn(
-                        "absolute inset-x-5 bottom-4 z-10 transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none",
-                        active ? "translate-y-0 opacity-100" : "translate-y-3 opacity-0",
+                        'absolute inset-x-5 bottom-4 z-10 transition-[opacity,transform] duration-500 ease-out motion-reduce:transition-none',
+                        active ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0',
                       )}
                     >
-                      <p className="line-clamp-3 text-[11px] leading-[1.45] text-background/78 @min-[560px]:text-xs">
+                      {/* KRL change: an explicit light colour. `text-background/78` is not generated by this project's colour config, so it fell back to the dark reading ink on a dark overlay. */}
+                      <p className="line-clamp-3 text-xs font-medium leading-[1.45] text-[#F7F3FB] @min-[560px]:text-sm">
                         {member.expertise}
                       </p>
                     </div>
@@ -324,10 +371,10 @@ export function TeamRevealGrid({
                     </h3>
                     <p
                       className={cn(
-                        "mt-0.5 truncate text-xs text-muted-foreground transition-colors duration-300 dark:text-ink-400",
-                        active && "text-[var(--team-accent)] dark:text-[var(--team-accent)]",
+                        'mt-0.5 truncate text-xs text-muted-foreground transition-colors duration-300 dark:text-ink-400',
+                        active && 'text-[var(--team-accent)] dark:text-[var(--team-accent)]',
                       )}
-                      style={{ "--team-accent": member.accent ?? "#fb4f43" } as React.CSSProperties}
+                      style={{ '--team-accent': member.accent ?? '#0D7651' } as React.CSSProperties}
                     >
                       {member.role}
                     </p>

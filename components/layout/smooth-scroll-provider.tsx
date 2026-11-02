@@ -1,5 +1,6 @@
 'use client';
 
+import { MotionConfig } from 'framer-motion';
 import Lenis from 'lenis';
 import * as React from 'react';
 
@@ -78,5 +79,15 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
     };
   }, []);
 
-  return <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>;
+  /*
+   * `reducedMotion="user"` makes every Framer Motion reveal on the site honour
+   * the visitor's reduced-motion setting: opacity still fades, but nothing
+   * slides or scales. Without it the reveals ignored the setting entirely —
+   * the CSS rule in globals.css only reaches CSS animations.
+   */
+  return (
+    <MotionConfig reducedMotion="user">
+      <LenisContext.Provider value={lenis}>{children}</LenisContext.Provider>
+    </MotionConfig>
+  );
 }

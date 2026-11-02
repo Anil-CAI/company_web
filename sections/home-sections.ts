@@ -4,7 +4,6 @@ import {
   DomainsSection,
   FeaturedProjectsSection,
   HeroSection,
-  ServicesPreviewSection,
 } from '@/components/home';
 import { SECTION_IDS } from '@/constants/routes';
 import type { PageSection } from '@/sections/types';
@@ -19,7 +18,6 @@ export const homeSections: PageSection[] = [
   { id: SECTION_IDS.hero, Component: HeroSection },
   { id: SECTION_IDS.projects, Component: FeaturedProjectsSection },
   { id: SECTION_IDS.dance, Component: DanceSection },
-  { id: SECTION_IDS.services, Component: ServicesPreviewSection },
   { id: SECTION_IDS.domains, Component: DomainsSection },
   { id: SECTION_IDS.contact, Component: ContactPreviewSection },
 ];

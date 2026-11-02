@@ -51,3 +51,7 @@ data/site-overrides.backup.json
 
 # Agent tool scratch state
 /.unlazy/
+
+# Python bytecode from the skills' search scripts
+__pycache__/
+*.pyc

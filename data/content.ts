@@ -102,7 +102,7 @@ export const aboutContent: AboutContent = {
     eyebrow: 'How we work',
     title: 'What we hold to',
     description:
-      'Three commitments that decide how a project is run, not just how it is described.',
+      'Three rules we follow on every project, and what each one means for you.',
   },
 };
 

@@ -30,7 +30,7 @@ export const socialLinks: SocialLink[] = [
     label: 'WhatsApp',
     href: '',
     handle: '',
-    icon: 'message',
+    icon: 'whatsapp',
   },
   {
     id: 'social-email',

@@ -73,7 +73,7 @@ const SocialFlipNode = ({
     return (
         <Wrapper
             {...wrapperProps}
-            className={cn("relative h-10 w-10 cursor-pointer", itemClassName)}
+            className={cn("relative size-9 cursor-pointer sm:size-10", itemClassName)}
             style={{ perspective: "1000px" }}
             onMouseEnter={() => setTooltipIndex(index)}
             onMouseLeave={() => setTooltipIndex(null)}
@@ -156,7 +156,8 @@ export default function SocialFlipButton({
     return (
         <div className={cn("flex items-center justify-center gap-4 p-4", className)}>
             <div
-                className="group relative flex items-center justify-center gap-2 rounded-2xl border border-border bg-card p-4 shadow-sm"
+                /* KRL: tighter on phones — 7 tiles at full size were wider than the screen. */
+                className="group relative flex items-center justify-center gap-1.5 rounded-2xl border border-border bg-card p-2 shadow-sm sm:gap-2 sm:p-4"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => {
                     setIsHovered(false);

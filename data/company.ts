@@ -42,21 +42,21 @@ export const company: Company = {
   principles: [
     {
       id: 'principle-precision',
-      title: 'Precision over spectacle',
+      title: 'Built to work every day, not just in a demo',
       description:
-        'A robot that works on the tenth thousandth cycle is worth more than one that impresses on the first.',
+        'We judge a robot by whether it still does the job reliably after hundreds of runs, not by how it looks in one video. Nothing is called finished until it has run on the real Go2 or G1, in conditions like yours.',
     },
     {
       id: 'principle-simulation',
-      title: 'Simulate before you build',
+      title: 'Tested in simulation first',
       description:
-        'Every system is proven in a digital twin — failure modes are cheap in simulation and expensive on the floor.',
+        'Before a robot moves in your space, we rehearse what it will do in a computer simulation of that space. Mistakes found there cost nothing; found on your floor, they cost time, money and sometimes hardware.',
     },
     {
       id: 'principle-open',
-      title: 'Open standards',
+      title: 'You own what we build',
       description:
-        'ROS 2, open message contracts and documented interfaces. No black boxes handed over at the end of a project.',
+        'We use open, widely used tools such as ROS 2 and hand over the code and the documentation with it. No locked black box — your team can understand, maintain and extend the system after the project ends.',
     },
   ],
 };

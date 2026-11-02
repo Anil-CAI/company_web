@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import { Reveal } from '@/components/common/reveal';
 import { Section } from '@/components/common/section';
 import { SectionHeading } from '@/components/common/section-heading';
-import { ServiceBentoGrid } from '@/components/services/service-bento-grid';
+import { Reveal, RevealGroup, RevealItem } from '@/components/common/reveal';
+import { ServiceCard } from '@/components/services/service-card';
 import { SECTION_IDS } from '@/constants/routes';
 import { servicesContent } from '@/data/content';
 import { getServicesByPlatform, servicePlatformGroups } from '@/data/services';
@@ -65,23 +65,21 @@ export function ServicePlatformsSection() {
               </Reveal>
 
               {/*
-                Every group is a bento grid with the focus-scale on scroll.
-                `ServiceBentoGrid` picks its slot pattern from the group size,
-                so the eight-service groups get wide anchor tiles and the
-                three-service group stays even rather than leaving a hole.
+                The same card as the rest of the site's services: icon, title,
+                copy and a hover folder listing the stack. The per-robot line
+                replaces the generic one where the offer differs (Go2 VR is
+                view-only, G1 VR adds training and maintenance).
               */}
-              <ServiceBentoGrid
-                className="mt-12"
-                items={groupServices.map((service) => ({
-                  service,
-                  /*
-                   * Where a platform changes the offer, say so here instead of
-                   * repeating the generic line — Go2 VR is view-only, G1 VR
-                   * adds training and maintenance.
-                   */
-                  copy: service.platformNotes?.[group.id] ?? service.shortDescription,
-                }))}
-              />
+              <RevealGroup className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {groupServices.map((service) => (
+                  <RevealItem key={service.id} className="h-full">
+                    <ServiceCard
+                      service={service}
+                      description={service.platformNotes?.[group.id] ?? service.shortDescription}
+                    />
+                  </RevealItem>
+                ))}
+              </RevealGroup>
             </section>
           );
         })}
