@@ -10,7 +10,7 @@ import { contactContent } from '@/data/content';
 /**
  * Large contact card.
  *
- * Every channel in one bordered surface. Rows stay in placeholder mode until
+ * Every channel as a bento tile wall. Tiles stay in placeholder mode until
  * `value` and `href` are set in `data/contact.ts`.
  */
 export function ContactCardSection() {
@@ -27,8 +27,9 @@ export function ContactCardSection() {
       />
 
       <Reveal variant="fade-up" className="mt-16">
-        <div className="overflow-hidden rounded-4xl border border-border bg-card shadow-soft">
-          <ContactChannels columns={3} />
+        {/* Wrapper div kept: saved editor edits address the list through it. */}
+        <div>
+          <ContactChannels columns="bento" />
         </div>
       </Reveal>
     </Section>

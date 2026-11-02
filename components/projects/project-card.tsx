@@ -126,9 +126,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           aspect ratios differ.
         */}
         <div className={cn('grid items-start gap-4', isTall && 'sm:grid-cols-2')}>
+          {/*
+            Phones get the clip alone (`hidden sm:block`): one column stacked
+            the still above its own footage, doubling the scroll per project
+            for a picture of the same thing. A lazy image under display:none
+            is never fetched, so phones skip the download too.
+          */}
           <div
             className={cn(
-              'overflow-hidden rounded-2xl border border-border shadow-soft',
+              'hidden overflow-hidden rounded-2xl border border-border shadow-soft sm:block',
               'transition-shadow duration-700 ease-premium group-hover:shadow-lift',
             )}
           >

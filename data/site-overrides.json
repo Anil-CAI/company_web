@@ -12,7 +12,7 @@
       }
     },
     "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1)": {
-      "label": "span \u00b7 KRL",
+      "label": "span · KRL",
       "hidden": true,
       "style": {
         "width": "385px",
@@ -22,7 +22,7 @@
       }
     },
     "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
-      "label": "span \u00b7 KRL",
+      "label": "span · KRL",
       "hidden": true,
       "style": {
         "width": "196px",
@@ -33,7 +33,7 @@
       }
     },
     "#site-header > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(2)": {
-      "label": "span \u00b7 KRL",
+      "label": "span · KRL",
       "style": {
         "width": "165px",
         "max-width": "none",
@@ -46,6 +46,115 @@
         "width": "221px",
         "max-width": "none",
         "min-height": "146px"
+      }
+    },
+    "#site-footer": {
+      "label": "footer · KRLRobotic SolutionsWe design, build and d…",
+      "style": {
+        "font-size": "0px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+      "label": "p · We design, build and deploy robotic system…",
+      "style": {
+        "font-size": "18px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1)": {
+      "label": "ul · HomeAboutServicesContact",
+      "style": {
+        "font-size": "0px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)": {
+      "label": "a · Home",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)": {
+      "label": "a · About",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)": {
+      "label": "a · Services",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > a:nth-of-type(1)": {
+      "label": "a · Contact",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(1) > h2:nth-of-type(1)": {
+      "label": "h2 · Company",
+      "style": {
+        "font-size": "18px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(2) > h2:nth-of-type(1)": {
+      "label": "h2 · Explore",
+      "style": {
+        "font-size": "18px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)": {
+      "label": "a · Featured work",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)": {
+      "label": "a · Dance models",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)": {
+      "label": "a · Domains",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(3) > h2:nth-of-type(1)": {
+      "label": "h2 · Capabilities",
+      "style": {
+        "font-size": "18px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(1) > a:nth-of-type(1)": {
+      "label": "a · Process",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1)": {
+      "label": "a · Technology stack",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > nav:nth-of-type(1) > div:nth-of-type(3) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1)": {
+      "label": "a · FAQ",
+      "style": {
+        "font-size": "16px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+      "label": "span · KRL",
+      "style": {
+        "font-size": "26px"
+      }
+    },
+    "#site-footer > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1) > span:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2)": {
+      "label": "span · Robotic Solutions",
+      "style": {
+        "font-size": "15px",
+        "color": "#000000"
       }
     }
   },
@@ -76,44 +185,44 @@
         "hidden": true
       },
       "#hero > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > h1:nth-of-type(1)": {
-        "label": "h1 \u00b7 Light you can touch.",
+        "label": "h1 · Light you can touch.",
         "style": {
           "translate": "-13px -230px",
           "color": "#ffffff"
         }
       },
       "#hero > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > p:nth-of-type(1)": {
-        "label": "p \u00b7 Hover the letters to wake the fibres. Pres\u2026",
+        "label": "p · Hover the letters to wake the fibres. Pres…",
         "style": {
           "translate": "-7px -191px"
         }
       },
       "#hero > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > a:nth-of-type(1)": {
-        "label": "a \u00b7 Get in touch",
+        "label": "a · Get in touch",
         "style": {
           "translate": "17px -140px"
         }
       },
       "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
-        "label": "p \u00b7 There was one more performance we did not \u2026",
+        "label": "p · There was one more performance we did not …",
         "style": {
           "color": "#e3deed"
         }
       },
       "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(2)": {
-        "label": "p \u00b7 This one was special in a different way. A\u2026",
+        "label": "p · This one was special in a different way. A…",
         "style": {
           "color": "#b6b3bd"
         }
       },
       "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(3)": {
-        "label": "p \u00b7 Two completely different vibes. One robot.\u2026",
+        "label": "p · Two completely different vibes. One robot.…",
         "style": {
           "color": "#c3beca"
         }
       },
       "#dance-models > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(4)": {
-        "label": "p \u00b7 Seeing a humanoid perform songs from our T\u2026",
+        "label": "p · Seeing a humanoid perform songs from our T…",
         "style": {
           "translate": "0px -11px",
           "color": "#cbc9cf"
@@ -124,52 +233,529 @@
         "style": {
           "min-height": "558px"
         }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Selected work",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1)": {
+        "label": "div · 01Humanoid Robotics",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1)": {
+        "label": "div · 02Human-Robot Interaction",
+        "style": {
+          "font-size": "1px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(3)": {
+        "label": "span · Human-Robot Interaction",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · 02",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(3)": {
+        "label": "span · Humanoid Robotics",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · 01",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(3)": {
+        "label": "span · Humanoid Robotics",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · 03",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(4) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(3)": {
+        "label": "span · Autonomous Systems",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(4) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · 04",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(3)": {
+        "label": "span · Autonomous Systems",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#projects > div:nth-of-type(1) > div:nth-of-type(2) > article:nth-of-type(5) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · 05",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#dance-models > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Motion lab",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#domains > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Expertise",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Contact",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(2)": {
+        "label": "p · Tell us about the system you have in mind …",
+        "style": {
+          "font-size": "20px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · WhatsApp",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · ✕",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Instagram",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · @kinematicroboticslabs",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Email",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2)": {
+        "label": "span · kinematicroboticslabs@gmail.com",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Phone",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2)": {
+        "label": "span · ✕",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(5) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · LinkedIn",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(5) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Kinematics Robotics Labs (KRL)",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(6) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · X",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(6) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · @KRLRobotics",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(7) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Location",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(7) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Kakinada",
+        "style": {
+          "font-size": "18px"
+        }
       }
     },
     "/services": {
       "#process-title > span:nth-of-type(1) > span:nth-of-type(3) > span:nth-of-type(1)": {
-        "label": "span \u00b7 engagement",
+        "label": "span · engagement",
         "style": {
           "color": "#fbf437"
         }
       },
       "#technologies-title > span:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
-        "label": "span \u00b7 we",
+        "label": "span · we",
         "style": {
           "color": "#e9ec27"
         }
       },
       "#service-categories": {
-        "label": "section \u00b7 CapabilitiesWhat runs on which robotMost o\u2026",
+        "label": "section · CapabilitiesWhat runs on which robotMost o…",
         "style": {
           "color": "#3c363f"
         }
       },
       "#platform-go2 > div:nth-of-type(2) > article:nth-of-type(1)": {
-        "label": "article \u00b7 Industrial AutomationProduction cells, lin\u2026",
+        "label": "article · Industrial AutomationProduction cells, lin…",
         "style": {
           "color": "#0a010e"
         }
       },
       "#platform-go2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2)": {
-        "label": "span \u00b7 8 services",
+        "label": "span · 8 services",
         "style": {
           "font-size": "35px"
         }
       },
       "#platform-go2 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
-        "label": "span \u00b7 Quadruped",
+        "label": "span · Quadruped",
         "style": {
           "font-size": "35px"
         }
       },
       "#platform-go2-title": {
-        "label": "h3 \u00b7 Go2",
+        "label": "h3 · Go2",
         "style": {
           "font-size": "60px"
         }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Services",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > a:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Quadruped",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > a:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Humanoid",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(3) > a:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Platform-independent",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#service-categories > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Capabilities",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#platform-g1 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · Humanoid",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#platform-g1 > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2)": {
+        "label": "span · 8 services",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#platform-g1 > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · The humanoid adds whole-body control and o…",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#platform-other > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · Platform-independent",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#platform-other > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2)": {
+        "label": "span · 3 services",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#service-details > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · In detail",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#technologies > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Stack",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#process > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Process",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#process > div:nth-of-type(1) > ol:nth-of-type(1) > li:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(1)": {
+        "label": "span · Phase",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#faq > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · FAQ",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#services-cta > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Next step",
+        "style": {
+          "font-size": "18px"
+        }
       }
     },
-    "/contact": {}
+    "/contact": {
+      "#map > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Map placeholder",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#map > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Headquarters",
+        "style": {
+          "font-size": "14px",
+          "color": "#000000"
+        }
+      },
+      "#map > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Location",
+        "style": {
+          "font-size": "15px",
+          "color": "#000000"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(3) > p:nth-of-type(1)": {
+        "label": "p · We use open, widely used tools such as ROS…",
+        "style": {
+          "font-size": "16px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(3) > h3:nth-of-type(1)": {
+        "label": "h3 · You own what we build",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > p:nth-of-type(1)": {
+        "label": "p · Before a robot moves in your space, we reh…",
+        "style": {
+          "font-size": "16px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > h3:nth-of-type(1)": {
+        "label": "h3 · Tested in simulation first",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · We judge a robot by whether it still does …",
+        "style": {
+          "font-size": "16px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > h3:nth-of-type(1)": {
+        "label": "h3 · Built to work every day, not just in a dem…",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > p:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Add a response time",
+        "style": {
+          "font-size": "18px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > p:nth-of-type(1)": {
+        "label": "p · Response time",
+        "style": {
+          "font-size": "14px",
+          "color": "#000000"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · We use what you send only to reply to your…",
+        "style": {
+          "font-size": "16px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(5) > label:nth-of-type(1)": {
+        "label": "label · Message",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(3) > label:nth-of-type(1)": {
+        "label": "label · Companyoptional",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > label:nth-of-type(1)": {
+        "label": "label · Name",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > label:nth-of-type(1)": {
+        "label": "label · Email",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(1) > form:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(4) > label:nth-of-type(1)": {
+        "label": "label · Subject",
+        "style": {
+          "font-size": "13px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(7) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Location",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(4) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Phone",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(1) > div:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · WhatsApp",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(2) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Instagram",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(5) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · LinkedIn",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(3) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · Email",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) > ul:nth-of-type(1) > li:nth-of-type(6) > a:nth-of-type(1) > span:nth-of-type(2) > span:nth-of-type(1)": {
+        "label": "span · X",
+        "style": {
+          "font-size": "14px"
+        }
+      },
+      "#contact > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Direct",
+        "style": {
+          "font-size": "15px",
+          "color": "#000000"
+        }
+      },
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Contact",
+        "style": {
+          "font-size": "15px",
+          "color": "#000000"
+        }
+      },
+      "#contact-form > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Enquiry",
+        "style": {
+          "font-size": "15px",
+          "color": "#000000"
+        }
+      }
+    },
+    "/about": {
+      "#main-content > div:nth-of-type(1) > header:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · About",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#story > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · About",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#team > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · Team",
+        "style": {
+          "font-size": "15px"
+        }
+      },
+      "#principles > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(1) > p:nth-of-type(1)": {
+        "label": "p · How we work",
+        "style": {
+          "font-size": "15px"
+        }
+      }
+    }
   }
 }
