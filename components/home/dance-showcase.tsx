@@ -25,8 +25,8 @@ const BooksShowcase = dynamic(
 /**
  * The dance routines, as a 3D shelf.
  *
- * Each routine is a "book": the cover is its poster frame, the detail panel
- * carries the summary and the move list. The carousel earns its keep because
+ * Each routine is a "book": the cover is its poster frame, and choosing it
+ * hands off to `DanceReader`, which carries the video, story and move list. The carousel earns its keep because
  * the catalogue is growing — new routines are appended to `data/dance.ts` and
  * appear here with no component change.
  *
