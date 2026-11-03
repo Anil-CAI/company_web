@@ -21,6 +21,7 @@ interface ProjectCardProps {
   project: Project;
   /** Zero-based position — drives the displayed index and the layout flip. */
   index: number;
+  className?: string;
 }
 
 /**
@@ -31,7 +32,7 @@ interface ProjectCardProps {
  * alternating rows. Both media slots are placeholders until `image.src` /
  * `video.src` are filled in.
  */
-export function ProjectCard({ project, index }: ProjectCardProps) {
+export function ProjectCard({ project, index, className }: ProjectCardProps) {
   const isReversed = index % 2 === 1;
   /* 9:16 phone footage needs a width cap; 16:9 fills the column as before. */
   const isTall = project.videoRatio === 'tall';
@@ -44,6 +45,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         'group grid items-center gap-10 lg:grid-cols-12 lg:gap-16',
         // The media column swaps sides on odd rows.
         isReversed && 'lg:[&>*:first-child]:order-2',
+        className,
       )}
     >
       {/* Copy column */}

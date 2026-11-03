@@ -21,7 +21,7 @@ export function ProcessSection() {
   const content = servicesContent.process;
 
   return (
-    <Section id={SECTION_IDS.process} bordered>
+    <Section id={SECTION_IDS.process} tone="paper" bordered>
       <SectionHeading
         id={`${SECTION_IDS.process}-title`}
         eyebrow={content.eyebrow}

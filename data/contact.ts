@@ -147,7 +147,8 @@ export const officeLocation: OfficeLocation = {
   label: 'Headquarters',
   address: 'Kakinada, Andhra Pradesh, India',
   mapEmbedUrl: '',
-  directionsUrl: '',
+  directionsUrl:
+    'https://www.google.com/maps/search/?api=1&query=Kakinada%2C+Andhra+Pradesh%2C+India',
 };
 
 /** Response-time note shown beside the form. Empty renders a placeholder. */

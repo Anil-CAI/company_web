@@ -61,7 +61,7 @@ export interface AboutContent {
 
 /** Contact page copy. */
 export interface ContactContent {
-  hero: HeroContent;
+  hero: HeroContent & { emailLabel: string };
   channels: SectionContent;
   form: SectionContent & {
     submitLabel: string;

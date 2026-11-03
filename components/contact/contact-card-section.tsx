@@ -17,7 +17,7 @@ export function ContactCardSection() {
   const content = contactContent.channels;
 
   return (
-    <Section id={SECTION_IDS.contact} bordered>
+    <Section id={SECTION_IDS.contact} tone="paper" bordered>
       <SectionHeading
         id={`${SECTION_IDS.contact}-title`}
         eyebrow={content.eyebrow}

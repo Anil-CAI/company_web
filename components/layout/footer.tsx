@@ -21,35 +21,33 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="site-footer" className="border-t border-border">
+    <footer id="site-footer" className="bg-violet text-[#F7F3FB]">
       <Container className="py-section-sm">
         <div className="grid gap-16 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)]">
           {/* Brand block */}
           <div className="flex flex-col gap-8">
-            <Logo withTagline />
-            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground text-pretty">
+            <Logo withTagline inverted />
+            <p className="max-w-xs text-sm leading-relaxed text-[#D9D1E8] text-pretty">
               {company.description}
             </p>
-            <SocialIcons />
+            <SocialIcons onDark />
           </div>
 
           {/* Link columns */}
           <nav aria-label="Footer" className="grid gap-10 sm:grid-cols-3">
             {footerNavigation.map((group) => (
               <div key={group.id}>
-                <h2 className="eyebrow mb-6">{group.title}</h2>
+                <h2 className="eyebrow mb-6 text-[#CFC6E0]">{group.title}</h2>
                 <ul className="flex flex-col gap-4">
                   {group.items.map((item) => (
                     <li key={item.id}>
                       <Link
                         href={item.href}
                         className={cn(
-                          'text-sm text-muted-foreground',
-                          'transition-colors duration-300 ease-premium hover:text-foreground',
+                          'text-sm text-[#D9D1E8]',
+                          'transition-colors duration-300 ease-premium hover:text-white',
                         )}
-                        {...(item.external
-                          ? { target: '_blank', rel: 'noopener noreferrer' }
-                          : {})}
+                        {...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                       >
                         {item.label}
                       </Link>
@@ -62,8 +60,8 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-20 flex flex-col gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-muted-foreground">
+        <div className="mt-20 flex flex-col gap-6 border-t border-[#F7F3FB]/15 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-[#CFC6E0]">
             © {currentYear} {company.legalName}
             {hasValue(company.founded) ? (
               <>
@@ -84,7 +82,7 @@ export function Footer() {
               <li key={item.id}>
                 <Link
                   href={item.href}
-                  className="text-xs text-muted-foreground transition-colors duration-300 ease-premium hover:text-foreground"
+                  className="text-xs text-[#CFC6E0] transition-colors duration-300 ease-premium hover:text-white"
                 >
                   {item.label}
                 </Link>

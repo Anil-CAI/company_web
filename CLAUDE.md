@@ -65,8 +65,10 @@ Data files reference icons as strings (`icon: 'mail'`) resolved through `iconReg
 
 Rules that are easy to break:
 
-- **Two emeralds, not one.** `#0F8A5F` (`--signal`) is for headings only: 3.57:1 on the ground passes the heading bar, not body text. `#0D7651` (`--accent`) is for small emerald text and for emerald fills under lilac-white text (5.14:1). `#0F8A5F` behind or on small text fails — the hero's "Get in touch" is a `#0D7651` pill for that reason. `scripts/verify-palette.mjs tokens` checks these pairs.
+- **Two emeralds, not one.** `#0F7F4E` (`--signal`) is for headings only: 4.1:1 on the ground (3.7:1 on mist) passes the heading bar, not body text. `#0D7651` (`--accent`) is for small emerald text and for emerald fills under lilac-white text (5.14:1). `--signal` behind or on small text fails — the hero's "Get in touch" is a `#0D7651` pill for that reason. `scripts/verify-palette.mjs tokens` checks these pairs.
 - `--snow` kept its name from the dark palette but is the violet reading ink.
+- **Section rhythm.** `Section` takes `tone` (`base | paper | mist | mint`, tokens `--paper #F6F3FA`, `--mist #E2DAEE`, `--mint #E4F1EA`). Mint is used once (About → values). The footer and the Services closing CTA are `bg-violet` (`#291C3F`) with lilac-white text; the section after the home hero is paper glass.
+- **Type and controls.** H1 is `text-display-h1` (64px), every section H2 is `text-display-sm` (48px). Buttons: primary = emerald pill (`--accent`), secondary/outline = 1px ink outline; all 48px tall, 20px side padding. Chips: 12px mono, `foreground/30` border, `foreground/75` text.
 - **Ink is violet-biased, never neutral grey.** Same for the Tailwind `ink-*` ramp; `ink-400` (small labels) is 6.3:1 on the ground.
 - **`backdrop-filter` makes an element the containing block for `position: fixed` descendants.** Nothing fixed or GSAP-pinned may live inside a `.bg-card` or inside the section right after the hero.
 - **The header flips light only over the black home hero** (`onDark` in `header.tsx`); everywhere else its marks are violet.

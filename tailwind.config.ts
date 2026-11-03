@@ -126,6 +126,10 @@ const config: Config = {
         kumkuma: 'hsl(var(--kumkuma))',
         pasupu: 'hsl(var(--pasupu))',
         skin: 'hsl(var(--skin))',
+        paper: 'hsl(var(--paper))',
+        mist: 'hsl(var(--mist))',
+        mint: 'hsl(var(--mint))',
+        violet: 'hsl(var(--violet))',
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -140,10 +144,27 @@ const config: Config = {
       },
       fontSize: {
         /** Apple-inspired display scale: tight tracking, generous size. */
-        'display-sm': ['clamp(2.25rem, 5vw, 3rem)', { lineHeight: '1.05', letterSpacing: '-0.03em' }],
-        'display-md': ['clamp(2.75rem, 7vw, 4.5rem)', { lineHeight: '1.02', letterSpacing: '-0.035em' }],
-        'display-lg': ['clamp(3.25rem, 9vw, 6.5rem)', { lineHeight: '0.98', letterSpacing: '-0.04em' }],
-        'display-xl': ['clamp(4rem, 12vw, 9rem)', { lineHeight: '0.94', letterSpacing: '-0.045em' }],
+        /** Page titles (h1): 64px at desktop. Section titles use display-sm (48px). */
+        'display-h1': [
+          'clamp(2.5rem, 5.5vw, 4rem)',
+          { lineHeight: '1.04', letterSpacing: '-0.035em' },
+        ],
+        'display-sm': [
+          'clamp(2.25rem, 5vw, 3rem)',
+          { lineHeight: '1.05', letterSpacing: '-0.03em' },
+        ],
+        'display-md': [
+          'clamp(2.75rem, 7vw, 4.5rem)',
+          { lineHeight: '1.02', letterSpacing: '-0.035em' },
+        ],
+        'display-lg': [
+          'clamp(3.25rem, 9vw, 6.5rem)',
+          { lineHeight: '0.98', letterSpacing: '-0.04em' },
+        ],
+        'display-xl': [
+          'clamp(4rem, 12vw, 9rem)',
+          { lineHeight: '0.94', letterSpacing: '-0.045em' },
+        ],
         eyebrow: ['0.75rem', { lineHeight: '1', letterSpacing: '0.18em' }],
       },
       spacing: {

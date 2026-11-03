@@ -9,6 +9,8 @@ import { SECTION_IDS } from '@/constants/routes';
 import { company } from '@/data/company';
 import { contactResponseNote } from '@/data/contact';
 import { contactContent } from '@/data/content';
+import { cn } from '@/lib/utils';
+import { hasValue } from '@/utils/media';
 
 /**
  * Enquiry form section.
@@ -20,7 +22,7 @@ export function ContactFormSection() {
   const content = contactContent.form;
 
   return (
-    <Section id={SECTION_IDS.contactForm} bordered>
+    <Section id={SECTION_IDS.contactForm} tone="mist" bordered>
       <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
         <div className="lg:col-span-5">
           <SectionHeading
@@ -32,12 +34,21 @@ export function ContactFormSection() {
           />
 
           <Reveal variant="fade-up" delay={0.2} className="mt-12">
-            <p className="eyebrow">Response time</p>
-            <p className="mt-4 text-base text-foreground">
-              <PlaceholderValue value={contactResponseNote} placeholder="Add a response time" />
-            </p>
+            {hasValue(contactResponseNote) ? (
+              <>
+                <p className="eyebrow">Response time</p>
+                <p className="mt-4 text-base text-foreground">
+                  <PlaceholderValue value={contactResponseNote} />
+                </p>
+              </>
+            ) : null}
 
-            <ul className="mt-12 flex flex-col gap-8 border-t border-border pt-10">
+            <ul
+              className={cn(
+                'flex flex-col gap-8 border-t border-border pt-10',
+                hasValue(contactResponseNote) && 'mt-12',
+              )}
+            >
               {company.principles.map((principle) => (
                 <li key={principle.id}>
                   <h3 className="text-base font-medium tracking-tight">{principle.title}</h3>

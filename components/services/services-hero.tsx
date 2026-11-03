@@ -32,7 +32,7 @@ export function ServicesHero() {
           <AnimatedText
             as="h1"
             text={hero.title}
-            className="mt-8 text-display-md font-medium tracking-tight text-headline"
+            className="mt-8 text-display-h1 font-medium tracking-tight text-headline"
           />
         </div>
 

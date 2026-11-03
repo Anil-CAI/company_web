@@ -24,7 +24,7 @@ export function ServicePlatformsSection() {
   const content = servicesContent.categories;
 
   return (
-    <Section id={SECTION_IDS.serviceCategories} bordered>
+    <Section id={SECTION_IDS.serviceCategories} tone="paper" bordered>
       <SectionHeading
         id={`${SECTION_IDS.serviceCategories}-title`}
         eyebrow={content.eyebrow}

@@ -37,7 +37,13 @@
     --snow: 261 36% 18%; /* #2A1E40 */
 
     /* Large headings — h1, h2 and the display sizes. Heading size only. */
-    --signal: 159 80% 30%; /* #0F8A5F — emerald, 3.57:1 */
+    --signal: 154 79% 28%; /* #0F7F4E — emerald, a deeper heading green than the old #0F8A5F */
+
+    /* Section tones — a calm rhythm of five close tints and one deep violet. */
+    --paper: 266 41% 97%; /* #F6F3FA — content bands */
+    --mist: 264 37% 89%; /* #E2DAEE — showcase bands */
+    --mint: 148 32% 92%; /* #E4F1EA — the one emerald-tinted band (values) */
+    --violet: 262 38% 18%; /* #291C3F — footer and closing call to action */
 
     /* Cards lift off the ground; translucent and blurred by the glass rule. */
     --card: 270 50% 97%; /* #F7F3FB */
@@ -54,7 +60,7 @@
     --secondary-foreground: 261 36% 18%;
 
     --muted: 265 42% 90%;
-    --muted-foreground: 262 20% 38%; /* #5B4D73 — 6.3:1 */
+    --muted-foreground: 257 19% 32%; /* #4A4160 — body text, darker than the old #5B4D73 */
 
     /* Accent = deep emerald: small emerald text, and fills under lilac text. */
     --accent: 159 80% 26%; /* #0D7651 */
@@ -517,7 +523,7 @@
   #hero + * {
     position: relative;
     z-index: 1;
-    background-color: hsl(var(--background) / 0.94);
+    background-color: hsl(var(--paper) / 0.94);
     -webkit-backdrop-filter: blur(28px) saturate(150%);
     backdrop-filter: blur(28px) saturate(150%);
     border-top: 1px solid rgb(255 255 255 / 0.85);

@@ -12,31 +12,31 @@ import { servicesContent } from '@/data/content';
 /**
  * Closing call to action.
  *
- * The one inverted surface on the site — black card, white type. Used sparingly
- * so it lands.
+ * Full-width deep violet, so the page ends on one branded base that runs
+ * straight into the violet footer.
  */
 export function ServicesCtaSection() {
   const content = servicesContent.cta;
 
   return (
-    <Section id="services-cta" label="Get in touch" bordered>
-      <Reveal variant="scale">
-        <div className="rounded-4xl bg-foreground px-8 py-20 text-background sm:px-16 sm:py-28">
+    <Section id="services-cta" label="Get in touch" className="bg-violet text-[#F7F3FB]">
+      <Reveal variant="fade-up">
+        <div>
           <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-eyebrow uppercase text-background/50">{content.eyebrow}</p>
+            <p className="font-mono text-eyebrow uppercase text-[#CFC6E0]">{content.eyebrow}</p>
 
             <AnimatedText
               as="h2"
               text={content.title}
-              className="mt-8 text-display-md font-medium tracking-tight"
+              className="mt-8 text-display-sm font-medium tracking-tight text-[#F7F3FB]"
             />
 
-            <p className="mx-auto mt-8 max-w-prose text-base leading-relaxed text-background/70 text-pretty sm:text-lg">
+            <p className="mx-auto mt-8 max-w-prose text-base leading-relaxed text-[#D9D1E8] text-pretty sm:text-lg">
               {content.body}
             </p>
 
             <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
-              <MagneticButton asChild size="lg" variant="secondary">
+              <MagneticButton asChild size="lg">
                 <Link href={ROUTES.contact}>
                   {content.ctaLabel}
                   <ArrowRight className="size-4" />
@@ -47,7 +47,7 @@ export function ServicesCtaSection() {
                 asChild
                 size="lg"
                 variant="ghost"
-                className="text-background hover:bg-background/10 hover:text-background"
+                className="text-[#F7F3FB] hover:bg-white/10 hover:text-white"
               >
                 <Link href={`${ROUTES.home}#${SECTION_IDS.projects}`}>
                   {content.secondaryLabel}

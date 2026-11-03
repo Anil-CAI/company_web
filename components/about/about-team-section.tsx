@@ -48,7 +48,7 @@ export function AboutTeamSection() {
   );
 
   return (
-    <Section id={SECTION_IDS.team} bordered>
+    <Section id={SECTION_IDS.team} tone="mist" bordered>
       <SectionHeading
         id={`${SECTION_IDS.team}-title`}
         eyebrow={people.eyebrow}

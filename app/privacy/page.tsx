@@ -9,8 +9,7 @@ import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: privacyPolicy.title,
-  description:
-    'What KRL Labs collects through the contact form, why, and how to have it deleted.',
+  description: 'What KRL Labs collects through the contact form, why, and how to have it deleted.',
   path: ROUTES.privacy,
 });
 
@@ -32,7 +31,9 @@ export default function PrivacyPage() {
     <Container className="py-section">
       <Reveal className="max-w-prose">
         <p className="eyebrow text-muted-foreground">Legal</p>
-        <h1 className="mt-6 text-display-md font-medium tracking-tight text-headline">{privacyPolicy.title}</h1>
+        <h1 className="mt-6 text-display-h1 font-medium tracking-tight text-headline">
+          {privacyPolicy.title}
+        </h1>
 
         <p className="mt-8 text-lg leading-relaxed text-muted-foreground text-pretty">
           {privacyPolicy.summary}
@@ -47,10 +48,7 @@ export default function PrivacyPage() {
         {privacyPolicy.sections.map((section) => (
           <Reveal key={section.id}>
             <section aria-labelledby={`${section.id}-title`}>
-              <h2
-                id={`${section.id}-title`}
-                className="text-2xl font-medium tracking-tight"
-              >
+              <h2 id={`${section.id}-title`} className="text-2xl font-medium tracking-tight">
                 {section.heading}
               </h2>
 

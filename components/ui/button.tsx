@@ -7,7 +7,9 @@ import { cn } from '@/lib/utils';
 /**
  * Button.
  *
- * Monochrome by design: solid black, hairline outline, or bare ghost. The pill
+ * Primary is the emerald pill; secondary is a 1px ink outline. Every size that
+ * carries text is 48px tall with 20px side padding.
+ * Was: solid black, hairline outline, or bare ghost. The pill
  * radius and the long easing curve are what make it read as premium.
  */
 const buttonVariants = cva(
@@ -21,16 +23,18 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-foreground text-background hover:bg-ink-800',
-        outline: 'border border-border bg-background text-foreground hover:border-foreground',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-ink-200',
+        default: 'bg-accent text-accent-foreground hover:bg-[#0B6646]',
+        outline:
+          'border border-foreground/70 bg-transparent text-foreground hover:bg-foreground hover:text-background',
+        secondary:
+          'border border-foreground/70 bg-transparent text-foreground hover:bg-foreground hover:text-background',
         ghost: 'text-foreground hover:bg-secondary',
         link: 'text-foreground underline-offset-4 hover:underline',
       },
       size: {
         sm: 'h-9 px-4 text-[0.8125rem]',
-        default: 'h-11 px-6',
-        lg: 'h-14 px-8 text-base',
+        default: 'h-12 px-5',
+        lg: 'h-12 px-5',
         icon: 'size-11',
       },
     },
@@ -42,8 +46,7 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
   /** Render as the child element (e.g. a Next.js `<Link>`) instead of a button. */
   asChild?: boolean;
 }

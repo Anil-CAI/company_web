@@ -5,6 +5,16 @@ import { cn } from '@/lib/utils';
 
 type SectionSpacing = 'default' | 'compact' | 'none';
 
+/** Background band. `base` is the lilac ground the body already paints. */
+type SectionTone = 'base' | 'paper' | 'mist' | 'mint';
+
+const TONE_CLASS: Record<SectionTone, string> = {
+  base: '',
+  paper: 'bg-paper',
+  mist: 'bg-mist',
+  mint: 'bg-mint',
+};
+
 const SPACING_CLASS: Record<SectionSpacing, string> = {
   default: 'py-section',
   compact: 'py-section-sm',
@@ -15,6 +25,8 @@ interface SectionProps extends React.HTMLAttributes<HTMLElement> {
   /** Anchor id — also used as the `aria-labelledby` target prefix. */
   id: string;
   spacing?: SectionSpacing;
+  /** Calm background rhythm between stacked sections; see the tokens in `globals.css`. */
+  tone?: SectionTone;
   /** Wrap children in a `Container`. Disable for full-bleed content. */
   contained?: boolean;
   /** Adds the hairline that separates stacked sections. */
@@ -39,6 +51,7 @@ export function Section({
   className,
   containerClassName,
   spacing = 'default',
+  tone = 'base',
   contained = true,
   bordered = false,
   label,
@@ -58,6 +71,7 @@ export function Section({
       className={cn(
         'relative w-full scroll-mt-24',
         SPACING_CLASS[spacing],
+        TONE_CLASS[tone],
         bordered && 'border-t border-border',
         className,
       )}

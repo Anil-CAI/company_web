@@ -18,7 +18,7 @@ export function AboutPrinciplesSection() {
   const content = aboutContent.principles;
 
   return (
-    <Section id={SECTION_IDS.principles} bordered>
+    <Section id={SECTION_IDS.principles} tone="mint" bordered>
       <SectionHeading
         id={`${SECTION_IDS.principles}-title`}
         eyebrow={content.eyebrow}
@@ -30,7 +30,7 @@ export function AboutPrinciplesSection() {
         {company.principles.map((principle, index) => (
           <RevealItem key={principle.id} className="h-full">
             <article className="flex h-full flex-col rounded-2xl border border-border bg-card p-8">
-              <span className="font-mono text-[0.6875rem] text-ink-400">
+              <span className="font-mono text-xs font-medium text-accent">
                 {String(index + 1).padStart(2, '0')}
               </span>
 

@@ -21,7 +21,7 @@ export function AboutStorySection() {
   const { story, founder } = teamContent;
 
   return (
-    <Section id={SECTION_IDS.story} bordered>
+    <Section id={SECTION_IDS.story} tone="paper" bordered>
       <SectionHeading
         id={`${SECTION_IDS.story}-title`}
         eyebrow={story.eyebrow}

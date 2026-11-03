@@ -85,7 +85,7 @@ export function MapSection() {
             ) : (
               <div
                 role="img"
-                aria-label="Map placeholder"
+                aria-label="Kakinada, India"
                 className="placeholder-surface absolute inset-0 flex flex-col items-center justify-center gap-4"
               >
                 <span
@@ -95,7 +95,7 @@ export function MapSection() {
                   <MapPin className="size-5 text-ink-500" strokeWidth={1.5} />
                 </span>
                 <p className="font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink-500">
-                  Map placeholder
+                  Kakinada · India
                 </p>
               </div>
             )}

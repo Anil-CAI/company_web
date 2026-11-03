@@ -18,7 +18,7 @@ export function DanceSection() {
   const content = homeContent.dance;
 
   return (
-    <Section id={SECTION_IDS.dance} bordered>
+    <Section id={SECTION_IDS.dance} tone="mist" bordered>
       <SectionHeading
         id={`${SECTION_IDS.dance}-title`}
         eyebrow={content.eyebrow}

@@ -18,7 +18,7 @@ export function TechnologyStacksSection() {
   const content = servicesContent.technologies;
 
   return (
-    <Section id={SECTION_IDS.technologies} bordered>
+    <Section id={SECTION_IDS.technologies} tone="mist" bordered>
       <SectionHeading
         id={`${SECTION_IDS.technologies}-title`}
         eyebrow={content.eyebrow}

@@ -48,7 +48,7 @@ export function PageHero({
           <AnimatedText
             as="h1"
             text={title}
-            className="mt-8 text-display-lg font-medium tracking-tight text-headline"
+            className="mt-8 text-display-h1 font-medium tracking-tight text-headline"
           />
 
           <Reveal variant="fade-up" delay={0.2}>

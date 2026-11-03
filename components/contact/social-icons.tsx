@@ -8,6 +8,8 @@ import { hasValue } from '@/utils/media';
 interface SocialIconsProps {
   /** Larger circles for the contact page's standalone row. */
   size?: 'sm' | 'lg';
+  /** On the deep-violet footer: light circles instead of ink ones. */
+  onDark?: boolean;
   className?: string;
 }
 
@@ -28,7 +30,7 @@ const ICON_SIZE = {
  * still announce which platform they represent — the layout is final before
  * the accounts exist. Fill `href` in `data/social.ts` to activate one.
  */
-export function SocialIcons({ size = 'sm', className }: SocialIconsProps) {
+export function SocialIcons({ size = 'sm', onDark = false, className }: SocialIconsProps) {
   return (
     <ul className={cn('flex flex-wrap items-center gap-2', className)}>
       {socialLinks.map((link) => {
@@ -44,9 +46,11 @@ export function SocialIcons({ size = 'sm', className }: SocialIconsProps) {
                 rel="noopener noreferrer"
                 aria-label={link.label}
                 className={cn(
-                  'flex items-center justify-center rounded-full border border-border text-muted-foreground',
-                  'transition-all duration-300 ease-premium',
-                  'hover:-translate-y-0.5 hover:border-foreground hover:text-foreground',
+                  'flex items-center justify-center rounded-full border',
+                  'transition-all duration-300 ease-premium hover:-translate-y-0.5',
+                  onDark
+                    ? 'border-[#F7F3FB]/30 text-[#D9D1E8] hover:border-white hover:text-white'
+                    : 'border-border text-muted-foreground hover:border-foreground hover:text-foreground',
                   CIRCLE_SIZE[size],
                 )}
               >
@@ -57,7 +61,8 @@ export function SocialIcons({ size = 'sm', className }: SocialIconsProps) {
                 role="img"
                 aria-label={`${link.label} — link not set`}
                 className={cn(
-                  'flex items-center justify-center rounded-full border border-dashed border-border text-ink-400',
+                  'flex items-center justify-center rounded-full border border-dashed',
+                  onDark ? 'border-[#F7F3FB]/30 text-[#CFC6E0]' : 'border-border text-ink-400',
                   CIRCLE_SIZE[size],
                 )}
               >

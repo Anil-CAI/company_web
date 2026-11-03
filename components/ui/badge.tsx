@@ -7,14 +7,14 @@ import { cn } from '@/lib/utils';
 const badgeVariants = cva(
   cn(
     'inline-flex items-center rounded-full border px-3 py-1',
-    'font-mono text-[0.6875rem] uppercase tracking-[0.08em]',
+    'font-mono text-xs uppercase tracking-[0.08em]',
     'transition-colors duration-300 ease-premium',
   ),
   {
     variants: {
       variant: {
-        default: 'border-border bg-secondary/60 text-muted-foreground',
-        outline: 'border-border bg-transparent text-muted-foreground',
+        default: 'border-foreground/30 bg-secondary/60 text-foreground/75',
+        outline: 'border-foreground/30 bg-transparent text-foreground/75',
         solid: 'border-transparent bg-foreground text-background',
       },
     },
@@ -25,8 +25,7 @@ const badgeVariants = cva(
 );
 
 export interface BadgeProps
-  extends React.HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {}
+  extends React.HTMLAttributes<HTMLSpanElement>, VariantProps<typeof badgeVariants> {}
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return <span className={cn(badgeVariants({ variant }), className)} {...props} />;

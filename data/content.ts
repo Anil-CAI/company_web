@@ -82,8 +82,7 @@ export const servicesContent: ServicesContent = {
   technologies: {
     eyebrow: 'Stack',
     title: 'Technology we build on',
-    description:
-      'Open standards wherever they exist, so nothing we hand over is a black box.',
+    description: 'Open standards wherever they exist, so nothing we hand over is a black box.',
   },
   process: {
     eyebrow: 'Process',
@@ -114,8 +113,7 @@ export const aboutContent: AboutContent = {
   principles: {
     eyebrow: 'How we work',
     title: 'What we hold to',
-    description:
-      'Three rules we follow on every project, and what each one means for you.',
+    description: 'Three rules we follow on every project, and what each one means for you.',
   },
 };
 
@@ -125,6 +123,7 @@ export const contactContent: ContactContent = {
     title: 'Start a conversation.',
     description:
       'Tell us what you are trying to build and the constraints around it. We read every message and reply with a real technical answer, not a brochure.',
+    emailLabel: 'Email us',
   },
   channels: {
     eyebrow: 'Direct',
@@ -150,6 +149,6 @@ export const contactContent: ContactContent = {
   map: {
     eyebrow: 'Location',
     title: 'Find us',
-    description: 'Set a Google Maps embed URL in the data file to replace the placeholder.',
+    description: 'Based in Kakinada, Andhra Pradesh. Open the map for directions.',
   },
 };

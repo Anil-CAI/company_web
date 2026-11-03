@@ -516,9 +516,12 @@ export function HeroLight() {
 
         <div className="krl-hero-copy flex flex-col gap-[1.1em]">
           <div className="krl-hero-spacer grow" />
-          <h1 className="m-0 text-[2.35em] font-medium leading-[1.04] tracking-[-0.025em] text-[#F4F7FB]">
+          <h1 className="m-0 text-[3.1em] font-medium leading-[1.04] tracking-[-0.025em] text-[#F4F7FB]">
             {heroLight.title}
           </h1>
+          <p className="m-0 max-w-[22em] text-[1.05em] leading-[1.45] text-[#F4F7FB]">
+            {heroLight.tagline}
+          </p>
           <p className="m-0 max-w-[22em] text-[1em] leading-[1.5] text-[#9AA6B8]">
             {heroLight.description}
           </p>

@@ -14,7 +14,7 @@ type HeadingAlign = 'left' | 'center';
  */
 const TITLE_SIZE: Record<HeadingSize, string> = {
   md: 'text-display-sm text-headline',
-  lg: 'text-display-md text-headline',
+  lg: 'text-display-sm text-headline',
 };
 
 interface SectionHeadingProps {

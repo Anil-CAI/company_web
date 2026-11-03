@@ -37,9 +37,14 @@ export function FeaturedProjectsSection() {
         than stacked, so the gap between them comes down to match — at the old
         spacing the page read as a series of disconnected screens.
       */}
-      <div className="mt-24 flex flex-col gap-24 sm:gap-28">
+      <div className="mt-24 flex flex-col gap-24">
         {featuredProjects.map((project, index) => (
-          <ProjectCard key={project.id} project={project} index={index} />
+          <ProjectCard
+            key={project.id}
+            project={project}
+            index={index}
+            className={index > 0 ? 'border-t border-border pt-24' : undefined}
+          />
         ))}
       </div>
     </Section>

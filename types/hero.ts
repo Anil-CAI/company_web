@@ -5,6 +5,8 @@ export interface HeroLight {
   /** Accessible name for the interactive canvas. */
   canvasLabel: string;
   title: string;
+  /** One line on what KRL does, between the title and the interaction hint. */
+  tagline: string;
   description: string;
   cta: { label: string; href: string };
 }
