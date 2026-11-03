@@ -1,55 +1,18 @@
-# Netlify configuration: builds, redirects, and security headers
+# Netlify: security headers only. Build settings and routing are left to
+# Netlify's Next.js auto-detection — overriding `publish` or adding a catch-all
+# redirect breaks the framework runtime.
 
-[build]
-  command = "npm run build"
-  publish = ".next"
-
-# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
-    # Prevent clickjacking attacks
     X-Frame-Options = "DENY"
-    # Prevent MIME-type sniffing
     X-Content-Type-Options = "nosniff"
-    # Force HTTPS for 1 year (31536000 seconds)
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
-    # XSS protection (legacy, but good backup)
-    X-XSS-Protection = "1; mode=block"
-    # Control referrer leakage on outbound links
     Referrer-Policy = "strict-origin-when-cross-origin"
-    # Disable access to sensitive APIs
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
-    # Content Security Policy: restrict where scripts, styles, and other resources can load from
-    # - default-src 'self': only allow resources from the same origin by default
-    # - script-src 'self' 'wasm-unsafe-eval': allow self + WebAssembly (needed for three.js)
-    # - style-src 'self' 'unsafe-inline': allow self + inline styles (Tailwind uses them)
-    # - img-src 'self' data: https:: allow local images, data URIs, and HTTPS images
-    # - font-src 'self': local fonts only
-    # - connect-src 'self' https://formsubmit.co: API calls to self and FormSubmit
-    # - frame-ancestors 'none': never embed this site in an iframe
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self' https://formsubmit.co; frame-ancestors 'none'"
-
-# Force HTTPS redirect
-[[redirects]]
-  from = "http://*"
-  to = "https://:splat"
-  status = 301
-  force = true
-
-# Block access to sensitive files
-[[redirects]]
-  from = "/.env*"
-  to = "/404"
-  status = 404
-
-[[redirects]]
-  from = "/.git/*"
-  to = "/404"
-  status = 404
-
-# SPA fallback: route unmatched URLs to index.html for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+    # Deliberately NOT restricting script-src / style-src: Next.js emits inline
+    # hydration scripts and the visual-editor overrides inject a pre-paint
+    # script and <style>, so a strict policy blanks the page. These directives
+    # are the ones that are safe here: no framing, no plugins, no <base> hijack,
+    # forms and fetches only to this site and the form service.
+    Content-Security-Policy = "frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co"
